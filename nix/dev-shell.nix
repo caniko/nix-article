@@ -4,6 +4,7 @@
   anx,
   anx-plot,
   figurefit,
+  plinthProject ? null,
 }:
 pkgs.mkShell {
   packages = with pkgs; [
@@ -54,6 +55,7 @@ pkgs.mkShell {
 
     # Documentation
     mdbook
+    plinthProject
   ];
 
   env = {

@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    plinth = {
+      url = "git+https://codeberg.org/caniko/plinth.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     figurefit = {
       url = "git+https://codeberg.org/caniko/FigureFit.git";
     };
@@ -24,6 +29,7 @@
     nixpkgs,
     rust-overlay,
     crane,
+    plinth,
     figurefit,
   }: let
     systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
@@ -90,8 +96,67 @@
         nativeBuildInputs = [pkgs.python314.pkgs.hatchling];
         meta.description = "Pandoc ODT export plugin for anx";
       };
+      docs = pkgs.stdenvNoCC.mkDerivation {
+        pname = "anx-docs";
+        version = "0.1.0";
+        src = lib.fileset.toSource {
+          root = ./docs;
+          fileset = lib.fileset.unions [
+            ./book.toml
+            ./src
+          ];
+        };
+        nativeBuildInputs = [pkgs.mdbook];
+        buildPhase = ''
+          mdbook build . --dest-dir docs-book
+        '';
+        installPhase = ''
+          mkdir -p $out
+          cp -r docs-book/. $out/
+        '';
+      };
+
+      plinthProject = plinth.packages.${system}.plinth-project;
+
+      projectSite = pkgs.stdenvNoCC.mkDerivation {
+        pname = "anx-site";
+        version = "0.1.0";
+        src = ./website;
+        nativeBuildInputs = [plinthProject];
+        buildPhase = ''
+          plinth-project build --config plinth-project.toml --out public
+        '';
+        installPhase = ''
+          mkdir -p $out
+          cp -r public/. $out/
+        '';
+      };
+
+      site = pkgs.stdenvNoCC.mkDerivation {
+        pname = "anx-site";
+        version = "0.1.0";
+        src = lib.fileset.toSource {
+          root = ./.;
+          fileset = lib.fileset.unions [
+            ./website
+            ./docs/book.toml
+            ./docs/src
+          ];
+        };
+        nativeBuildInputs = [plinthProject pkgs.mdbook];
+        buildPhase = ''
+          plinth-project build --config website/plinth-project.toml --out public
+          mdbook build docs --dest-dir docs-book
+        '';
+        installPhase = ''
+          mkdir -p $out
+          cp -r public/. $out/
+          mkdir -p $out/docs
+          cp -r docs-book/. $out/docs/
+        '';
+      };
     in {
-      inherit anx anx-plot anx-plugin-zenodo anx-plugin-pandoc;
+      inherit anx anx-plot anx-plugin-zenodo anx-plugin-pandoc docs site projectSite;
 
       figurefit = figurefit.packages.${system}.default;
 
@@ -123,6 +188,7 @@
       default = pkgs.callPackage ./nix/dev-shell.nix {
         inherit lib pkgs anx anx-plot;
         figurefit = figurefit.packages.${system}.default;
+        plinthProject = plinth.packages.${system}.plinth-project;
       };
     });
 

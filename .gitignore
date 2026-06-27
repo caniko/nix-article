@@ -4,3 +4,7 @@ result*
 __pycache__/
 .env
 .direnv/
+docs/book/
+website/public/
+.plinth-project/
+dist/plinth-project/

@@ -1,0 +1,73 @@
+[site]
+title = "anx"
+description = "Article toolchain: figure layout, generation, and manuscript building"
+base_url = "/"
+footer_note = "Maintained by caniko — BSD 2-Clause"
+
+[[nav]]
+label = "Overview"
+href = "#overview"
+
+[[nav]]
+label = "Features"
+href = "#features"
+
+[[nav]]
+label = "Docs"
+href = "/docs/"
+
+[[nav]]
+label = "Source"
+href = "https://codeberg.org/caniko/nix-article"
+
+[[pages]]
+slug = "index"
+title = "anx"
+description = "Article toolchain: figure layout, generation, and manuscript building"
+
+[[pages.sections]]
+type = "hero"
+title = "anx"
+tagline = "Scientific article toolchain"
+subtitle = "From layout specs to publication-ready figures and manuscripts. anx orchestrates FigureFit layout solving, Python panel generation, TikZ compilation, composite assembly, and LaTeX building — all from a single CLI."
+
+[[pages.sections.ctas]]
+label = "Read the docs"
+href = "/docs/"
+primary = true
+
+[[pages.sections.ctas]]
+label = "View source"
+href = "https://codeberg.org/caniko/nix-article"
+
+[[pages.sections]]
+type = "feature_grid"
+id = "overview"
+
+[[pages.sections.features]]
+title = "Figure Pipeline"
+description = "Write layout specs in TOML, solve with FigureFit, draw panels with matplotlib, assemble composites — all automated."
+
+[[pages.sections.features]]
+title = "Print-Size Precision"
+description = "Every panel is exported at its exact print dimensions with boundary guard validation and automatic margin solvers."
+
+[[pages.sections.features]]
+title = "Plugin System"
+description = "Extend with Zenodo archival, Pandoc ODT export, or custom plugins via the anx-plugin-<name> convention."
+
+[[pages.sections]]
+type = "feature_grid"
+id = "features"
+
+[[pages.sections.features]]
+title = "Single CLI"
+description = "anx init, anx layout solve, anx figure all, anx build rebuild — one command chain."
+
+[[pages.sections.features]]
+title = "Python & LaTeX"
+description = "Share sizing, palette, and fonts between matplotlib and TikZ panels."
+
+[[pages.sections.features]]
+title = "Deterministic"
+description = "FigureFit reports include void metrics, height utilisation, and scores."
