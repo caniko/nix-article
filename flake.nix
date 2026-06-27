@@ -107,8 +107,10 @@
           ];
         };
         nativeBuildInputs = [pkgs.mdbook];
-        sourceRoot = ".";
+        dontUnpack = true;
         buildPhase = ''
+          cp -r --no-preserve=mode $src/. .
+          chmod -R +w .
           mdbook build docs --dest-dir docs-book
         '';
         installPhase = ''
