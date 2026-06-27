@@ -110,11 +110,8 @@ fn main() -> Result<()> {
     let cli = Cli::parse();
 
     // `init` doesn't need config; all other commands do.
-    match &cli.command {
-        Commands::Init { dir } => {
-            return config::scaffold(dir);
-        }
-        _ => {}
+    if let Commands::Init { dir } = &cli.command {
+        return config::scaffold(dir);
     }
 
     let project_dir = cli.project_dir.unwrap_or_else(|| std::env::current_dir().unwrap());

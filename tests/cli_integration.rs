@@ -1,5 +1,4 @@
 use std::process::Command;
-use std::path::Path;
 
 fn anx_binary() -> String {
     let target_dir = std::env::var("CARGO_TARGET_DIR")
