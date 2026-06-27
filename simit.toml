@@ -1,0 +1,10 @@
+[flake]
+backend = "rust-crane"
+
+[ci]
+runtime = "nix"
+runner = "atlas-nix-trusted"
+with_nextest = true
+with_audit = true
+with_deny = true
+with_docs = true

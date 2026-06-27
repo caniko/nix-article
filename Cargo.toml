@@ -1,0 +1,24 @@
+[package]
+name = "anx"
+version = "0.1.0"
+description = "Article toolchain: figure layout, generation, and manuscript building"
+edition = "2024"
+license = "Apache-2.0"
+
+[[bin]]
+name = "anx"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive", "env"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+miette = { version = "7", features = ["fancy"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+duct = "0.13"
+glob = "0.3"
+shellexpand = "3"
+dirs = "6"
+shlex = "1"

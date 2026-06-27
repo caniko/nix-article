@@ -1,0 +1,15 @@
+[article]
+name = "demo-article"
+tex-main = "manuscript.tex"
+
+[figures]
+registry = "figures.toml"
+layouts = "figures/layouts"
+panels = "figures/panels"
+composites = "figures/composites"
+
+[tools]
+figurefit = "figurefit"
+python = "uv run python"
+latexmk = "latexmk"
+lualatex = "lualatex"

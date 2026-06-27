@@ -1,0 +1,22 @@
+# Demo layout spec for FigureFit solver.
+# See https://codeberg.org/caniko/FigureFit for full schema.
+
+[layout]
+width = 160
+height = 100
+
+[[groups]]
+kind = "flexible"
+min_panels = 3
+
+  [[groups.alternatives]]
+  [groups.alternatives.A]
+  aspect = [1.5, 1.0]
+
+  [[groups.alternatives]]
+  [groups.alternatives.A]
+  aspect = [1.0, 1.0]
+  [groups.alternatives.B]
+  aspect = [1.0, 1.0]
+  [groups.alternatives.C]
+  aspect = [1.0, 1.0]

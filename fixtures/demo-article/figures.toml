@@ -1,0 +1,5 @@
+# Demo figure registry
+[demo]
+number = 1
+module = "anx_plot.example.fig_demo"
+layout = "CF01"
