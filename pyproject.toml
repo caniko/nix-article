@@ -31,3 +31,8 @@ select = ["E", "F", "I", "W"]
 
 [tool.pytest.ini_options]
 testpaths = ["python/tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

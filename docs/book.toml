@@ -1,0 +1,12 @@
+[book]
+title = "anx — Article Toolchain"
+authors = ["caniko"]
+language = "en"
+multilingual = false
+src = "src"
+
+[output.html]
+smart-punctuation = true
+no-section-label = true
+git-repository-url = "https://codeberg.org/caniko/nix-article"
+edit-url-template = "https://codeberg.org/caniko/nix-article/edit/main/docs/src/{path}"
