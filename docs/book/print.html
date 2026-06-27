@@ -1,0 +1,1618 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>anx — Article Toolchain</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-316c49e0.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-539f3b62.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">anx — Article Toolchain</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://codeberg.org/caniko/nix-article" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="anx--article-toolchain"><a class="header" href="#anx--article-toolchain">anx — Article Toolchain</a></h1>
+<p><strong>anx</strong> is a toolchain for scientific article figure generation, layout, and
+manuscript building. It provides:</p>
+<ul>
+<li><strong>anx</strong> CLI — orchestrates figure layout solving, panel generation, composite
+assembly, and LaTeX compilation.</li>
+<li><strong>anx-plot</strong> Python library — shared drawing primitives, sizing, color palettes,
+and export helpers for matplotlib-based figure panels.</li>
+<li><strong>FigureFit</strong> integration — uses the FigureFit layout solver to arrange panels
+into publication-ready composite figures.</li>
+<li><strong>Optional plugin system</strong> — extend with custom visual-rubric, pandoc, or
+post-processing plugins.</li>
+</ul>
+<p>anx is framework-agnostic. You write your figure panels as Python scripts using
+anx-plot helpers; anx handles the build orchestration.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
+<h2 id="installation"><a class="header" href="#installation">Installation</a></h2>
+<h3 id="nix-flake-recommended"><a class="header" href="#nix-flake-recommended">Nix Flake (recommended)</a></h3>
+<pre><code class="language-console">nix develop github:caniko/nix-article
+</code></pre>
+<p>This provides <code>anx</code>, <code>anx-plot</code>, <code>figurefit</code>, <code>latexmk</code>, <code>inkscape</code>, and all
+Python/LaTeX dependencies in a single shell.</p>
+<p>To use anx in an existing article project’s <code>flake.nix</code>:</p>
+<pre><code class="language-nix">{
+  inputs = {
+    nix-article.url = "github:caniko/nix-article";
+  };
+
+  outputs = { nix-article, ... }: {
+    devShells.x86_64-linux.default =
+      nix-article.lib.x86_64-linux.mkArticleDevShell { };
+  };
+}
+</code></pre>
+<h3 id="cargo"><a class="header" href="#cargo">Cargo</a></h3>
+<pre><code class="language-console">cargo install anx
+</code></pre>
+<p>The CLI binary is installed as <code>anx</code>. You will also need <code>anx-plot</code> (Python),
+<code>figurefit</code>, <code>latexmk</code>, and <code>lualatex</code> available separately.</p>
+<h3 id="python-anx-plot-library-only"><a class="header" href="#python-anx-plot-library-only">Python (anx-plot library only)</a></h3>
+<pre><code class="language-console">uv add anx-plot
+</code></pre>
+<p>Installs the <code>anx_plot</code> Python package with drawing primitives, sizing,
+colour palette, and export helpers.</p>
+<h2 id="quick-start"><a class="header" href="#quick-start">Quick Start</a></h2>
+<p>Scaffold a new article project:</p>
+<pre><code class="language-console">anx init my-article
+cd my-article
+</code></pre>
+<p>This creates:</p>
+<pre><code>my-article/
+  article.toml         # Project configuration
+  figures.toml         # Figure registry
+  figures/
+    layouts/            # FigureFit layout specs
+    panels/             # Generated panel SVGs/PNGs
+</code></pre>
+<p>Build everything:</p>
+<pre><code class="language-console">anx build rebuild
+</code></pre>
+<p>This runs the full pipeline:</p>
+<ol>
+<li><code>anx sizes sync</code> — generate <code>fonts.tex</code> and <code>figure_sizes.tex</code> from Python
+sizing constants</li>
+<li><code>anx layout solve</code> — run FigureFit on all layout TOMLs</li>
+<li><code>anx figure all</code> — export matplotlib panels, compile TikZ, assemble composites</li>
+<li><code>anx build compile</code> — compile the LaTeX manuscript</li>
+</ol>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<ul>
+<li>Read the <a href="#concepts">Concepts</a> guide for the article lifecycle</li>
+<li>See <a href="#configuration-1">Configuration</a> for the <code>article.toml</code> schema</li>
+<li>Browse the <a href="#anx--nix-article-cli">anx CLI Reference</a> for subcommands</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="concepts"><a class="header" href="#concepts">Concepts</a></h1>
+<p>The anx toolchain orchestrates a four-stage article production pipeline:</p>
+<pre><code>sizing → layout → figures → compilation
+</code></pre>
+<h2 id="project-configuration"><a class="header" href="#project-configuration">Project Configuration</a></h2>
+<p>Every article has an <code>article.toml</code> at its root. This declares the article
+name, LaTeX entry point, figure paths, tool binaries, sizing constants, and
+plugin configuration. The <code>anx</code> CLI searches upward from the current directory
+to find it.</p>
+<h2 id="figure-registry-figurestoml"><a class="header" href="#figure-registry-figurestoml">Figure Registry (<code>figures.toml</code>)</a></h2>
+<p>The registry maps figure slugs to composite numbers, Python modules, and layout
+specs. Each entry looks like:</p>
+<pre><code class="language-toml">[architecture]
+number = 1
+module = "my_figures.fig1_architecture"
+layout = "CF01"
+</code></pre>
+<ul>
+<li><strong>slug</strong> — short identifier (used in CLI filters)</li>
+<li><strong>number</strong> — composite figure number (e.g. 1 → CF01)</li>
+<li><strong>module</strong> — Python module path, importable from the project root</li>
+<li><strong>layout</strong> — basename of the FigureFit spec in <code>figures/layouts/</code></li>
+</ul>
+<h2 id="layout-solving-with-figurefit"><a class="header" href="#layout-solving-with-figurefit">Layout Solving with FigureFit</a></h2>
+<p>FigureFit is a dynamic-programming layout solver that arranges panels into
+publication-ready composite figures. Layouts are defined as TOML specs:</p>
+<pre><code class="language-toml">[layout]
+width = 160
+height = 100
+
+[[groups]]
+kind = "flexible"
+min_panels = 3
+
+  [[groups.alternatives]]
+  [groups.alternatives.A]
+  aspect = [1.5, 1.0]
+
+  [[groups.alternatives]]
+  [groups.alternatives.A]
+  aspect = [1.0, 1.0]
+  [groups.alternatives.B]
+  aspect = [1.0, 1.0]
+  [groups.alternatives.C]
+  aspect = [1.0, 1.0]
+</code></pre>
+<p>Run the solver:</p>
+<pre><code class="language-console">anx layout solve               # all layouts
+anx layout solve CF01          # single figure
+</code></pre>
+<p>The solver writes <code>CF01_report.toml</code> alongside the spec, containing placed
+panel positions and dimensions in millimetres.</p>
+<h2 id="panel-generation-python"><a class="header" href="#panel-generation-python">Panel Generation (Python)</a></h2>
+<p>Figure panels are matplotlib-based drawing functions. Each panel is a function
+<code>draw(ax: plt.Axes) -&gt; None</code> that draws into a pre-sized axes. The canonical
+module entry point is <code>export_panels()</code>:</p>
+<pre><code class="language-python"># my_figures/fig1_architecture.py
+from anx_plot.palette import BLUE, RED
+
+def export_panels(output_dir, prefix="CF", **kwargs):
+    panel_fns = {
+        "A": _draw_overview,
+        "B": _draw_detail,
+    }
+    return _export(panel_fns, output_dir, prefix=prefix)
+</code></pre>
+<p>The <code>anx figure panels</code> subcommand imports the module and exports each panel
+at its solver-determined print size as SVG + PNG.</p>
+<h3 id="anx-plot-library"><a class="header" href="#anx-plot-library">anx-plot Library</a></h3>
+<p>The Python library provides:</p>
+<ul>
+<li><strong><code>sizing</code></strong> — <code>FIGWIDTH_IN</code>, font sizes, DPI, <code>generate_latex_fonts()</code></li>
+<li><strong><code>palette</code></strong> — Tol Bright colour scheme (colorblind-safe)</li>
+<li><strong><code>helpers</code></strong> — <code>diagram_box()</code>, <code>diagram_arrow()</code>, <code>bottom_legend()</code>, label
+margin solvers</li>
+<li><strong><code>layout</code></strong> — <code>export_panels()</code>, <code>read_solver_report()</code>, <code>apply_style()</code></li>
+<li><strong><code>standard</code></strong> — <code>finish_axes()</code>, <code>finish_exact_panel()</code>, <code>finish_heatmap()</code>,
+collision-aware annotation placement</li>
+<li><strong><code>export</code></strong> — <code>export_fig()</code> with SVG/inkscape pipeline, boundary guard</li>
+<li><strong><code>significance</code></strong> — p-value formatting, correction, brackets</li>
+<li><strong><code>line_style</code></strong> — compact multi-series line chart helpers</li>
+</ul>
+<h2 id="composite-assembly"><a class="header" href="#composite-assembly">Composite Assembly</a></h2>
+<p>After panels are exported, <code>anx figure composites</code> assembles individual panel
+SVGs into the final composite figure image based on the solver report’s
+placement data.</p>
+<h2 id="tikz-compilation"><a class="header" href="#tikz-compilation">TikZ Compilation</a></h2>
+<p>TikZ panels (<code>.tex</code> files in <code>figures/layouts/</code>) are compiled via <code>lualatex</code>
+to SVG. This step handles diagram-style panels that benefit from LaTeX
+typesetting and the <code>synbox</code>/<code>synarr</code>/<code>synlbl</code> TikZ styles defined in
+<code>tikz/fonts.tex</code>.</p>
+<h2 id="size-synchronisation"><a class="header" href="#size-synchronisation">Size Synchronisation</a></h2>
+<p>Sizing constants live in <code>anx_plot.sizing</code> (Python) as the single source of
+truth. Run <code>anx sizes sync</code> to regenerate:</p>
+<ul>
+<li><strong><code>tikz/fonts.tex</code></strong> — <code>\synSmall</code>, <code>\synBase</code>, <code>\synLabel</code>, <code>\synTitle</code> macros
+and TikZ styles matching Python font sizes</li>
+<li><strong><code>figure_sizes.tex</code></strong> — <code>\linewidth</code>, <code>\maxfigheight</code>, and <code>\setkeys{Gin}</code>
+defaults so LaTeX includes figures at native resolution with zero scaling</li>
+</ul>
+<h2 id="latex-compilation"><a class="header" href="#latex-compilation">LaTeX Compilation</a></h2>
+<p><code>anx build compile</code> runs <code>latexmk -lualatex</code> on the manuscript. <code>anx build rebuild</code> runs the full pipeline: sync → solve → figures → compile.</p>
+<h2 id="plugin-architecture"><a class="header" href="#plugin-architecture">Plugin Architecture</a></h2>
+<p>Plugins extend anx with custom behaviour. A plugin is a binary named
+<code>anx-plugin-&lt;name&gt;</code> on <code>$PATH</code>, invoked with <code>--plugin-context &lt;json&gt;</code>. See
+<a href="#plugin-system">Plugins</a> for details.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx--nix-article-cli"><a class="header" href="#anx--nix-article-cli"><code>anx</code> — nix-article CLI</a></h1>
+<h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
+<pre><code>anx [global flags] &lt;command&gt; [arguments...]
+</code></pre>
+<h2 id="commands"><a class="header" href="#commands">Commands</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#anx-init--scaffold-a-new-article-project"><code>anx init</code></a></td><td>Scaffold a new article project</td></tr>
+<tr><td><a href="#anx-layout--figure-layout-solving-and-validation"><code>anx layout</code></a></td><td>Figure layout solving and validation</td></tr>
+<tr><td><a href="#anx-figure--figure-generation-and-assembly"><code>anx figure</code></a></td><td>Figure generation and assembly</td></tr>
+<tr><td><a href="#anx-build--latex-compilation"><code>anx build</code></a></td><td>LaTeX compilation</td></tr>
+<tr><td><a href="#anx-sizes--font-and-figure-size-tex-regeneration"><code>anx sizes</code></a></td><td>Font and size TeX file regeneration</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="anx-init"><a class="header" href="#anx-init"><code>anx init</code></a></h3>
+<p>Scaffold a new article project with default config files and directory structure.</p>
+<pre><code class="language-bash">anx init [dir]
+</code></pre>
+<p>See <a href="#anx-init--scaffold-a-new-article-project">init reference</a>.</p>
+<h3 id="anx-layout"><a class="header" href="#anx-layout"><code>anx layout</code></a></h3>
+<p>Solve figure layouts with FigureFit or validate the figure registry.</p>
+<pre><code class="language-bash">anx layout solve [figure]
+anx layout check
+</code></pre>
+<p>See <a href="#anx-layout--figure-layout-solving-and-validation">layout reference</a>.</p>
+<h3 id="anx-figure"><a class="header" href="#anx-figure"><code>anx figure</code></a></h3>
+<p>Export matplotlib panels, compile TikZ to SVG, and assemble composite figures.</p>
+<pre><code class="language-bash">anx figure panels [figure]
+anx figure tikz [figure]
+anx figure composites [figure]
+anx figure all [figure]
+</code></pre>
+<p>See <a href="#anx-figure--figure-generation-and-assembly">figure reference</a>.</p>
+<h3 id="anx-build"><a class="header" href="#anx-build"><code>anx build</code></a></h3>
+<p>Compile the LaTeX manuscript or run the full rebuild pipeline.</p>
+<pre><code class="language-bash">anx build compile
+anx build rebuild
+</code></pre>
+<p>See <a href="#anx-build--latex-compilation">build reference</a>.</p>
+<h3 id="anx-sizes"><a class="header" href="#anx-sizes"><code>anx sizes</code></a></h3>
+<p>Regenerate font and figure-size TeX files from Python sizing constants.</p>
+<pre><code class="language-bash">anx sizes sync
+</code></pre>
+<p>See <a href="#anx-sizes--font-and-figure-size-tex-regeneration">sizes reference</a>.</p>
+<h2 id="global-flags"><a class="header" href="#global-flags">Global flags</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-C &lt;dir&gt;</code>, <code>--project-dir &lt;dir&gt;</code></td><td>Run as if started in <code>&lt;dir&gt;</code></td></tr>
+<tr><td><code>--help</code></td><td>Print help information</td></tr>
+<tr><td><code>--version</code></td><td>Print version information</td></tr>
+</tbody>
+</table>
+</div>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx-init--scaffold-a-new-article-project"><a class="header" href="#anx-init--scaffold-a-new-article-project"><code>anx init</code> — Scaffold a new article project</a></h1>
+<h2 id="usage-1"><a class="header" href="#usage-1">Usage</a></h2>
+<pre><code class="language-bash">anx init [dir]
+</code></pre>
+<p>Creates a new nix-article project in <code>dir</code> (defaults to the current
+directory).</p>
+<h2 id="what-it-creates"><a class="header" href="#what-it-creates">What it creates</a></h2>
+<pre><code>dir/
+├── article.toml          # Article metadata and build config
+├── figures.toml          # Figure registry
+└── figures/
+    ├── layouts/          # TOML layout specs for FigureFit
+    └── panels/           # Matplotlib panel scripts
+</code></pre>
+<h2 id="defaults"><a class="header" href="#defaults">Defaults</a></h2>
+<p>Every config option is populated with a sensible default so the project
+compiles out of the box. Edit <code>article.toml</code> and <code>figures.toml</code> to match
+your content.</p>
+<h2 id="idempotency"><a class="header" href="#idempotency">Idempotency</a></h2>
+<p><code>anx init</code> will <strong>not</strong> overwrite existing files. If <code>article.toml</code>
+already exists, it is left untouched. Only missing files are created.</p>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<p>Scaffold in the current directory:</p>
+<pre><code class="language-bash">anx init
+</code></pre>
+<p>Scaffold in a named directory:</p>
+<pre><code class="language-bash">anx init my-paper
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx-layout--figure-layout-solving-and-validation"><a class="header" href="#anx-layout--figure-layout-solving-and-validation"><code>anx layout</code> — Figure layout solving and validation</a></h1>
+<h2 id="anx-layout-solve-figure"><a class="header" href="#anx-layout-solve-figure"><code>anx layout solve [figure]</code></a></h2>
+<p>Runs the FigureFit binary on the TOML layout specs under
+<code>figures/layouts/</code>.</p>
+<h3 id="output"><a class="header" href="#output">Output</a></h3>
+<p>For each layout spec <code>&lt;prefix&gt;.toml</code>, generates:</p>
+<ul>
+<li><code>&lt;prefix&gt;_report.toml</code> — solver results and panel dimensions</li>
+<li><code>&lt;prefix&gt;_layout.tex</code> — TikZ code for the composite figure</li>
+</ul>
+<h3 id="optional-figure-argument"><a class="header" href="#optional-figure-argument">Optional figure argument</a></h3>
+<p>If a <code>figure</code> name is given, only the layout spec matching that figure is
+solved. When omitted, all layout specs are solved.</p>
+<pre><code class="language-bash"># Solve all figures
+anx layout solve
+
+# Solve only figure-3
+anx layout solve figure-3
+</code></pre>
+<h2 id="anx-layout-check"><a class="header" href="#anx-layout-check"><code>anx layout check</code></a></h2>
+<p>Validates the figure registry in <code>figures.toml</code>.</p>
+<h3 id="checks-performed"><a class="header" href="#checks-performed">Checks performed</a></h3>
+<ul>
+<li>Every figure referenced in <code>figures.toml</code> has a corresponding layout
+spec in <code>figures/layouts/</code>.</li>
+<li>Every layout spec has a generated <code>_report.toml</code> from a prior solve.</li>
+</ul>
+<p>Exits with a non-zero status and lists all problems found.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx-figure--figure-generation-and-assembly"><a class="header" href="#anx-figure--figure-generation-and-assembly"><code>anx figure</code> — Figure generation and assembly</a></h1>
+<h2 id="anx-figure-panels-figure"><a class="header" href="#anx-figure-panels-figure"><code>anx figure panels [figure]</code></a></h2>
+<p>Export matplotlib panels at the sizes determined by the FigureFit solver.</p>
+<p>Each panel script in <code>figures/panels/</code> is run with its target dimensions
+(width, height) read from the corresponding <code>_report.toml</code>. Output files
+land in <code>figures/panels/</code> alongside the scripts.</p>
+<h2 id="anx-figure-tikz-figure"><a class="header" href="#anx-figure-tikz-figure"><code>anx figure tikz [figure]</code></a></h2>
+<p>Compile TikZ <code>.tex</code> panel files to SVG via LuaLaTeX.</p>
+<p>Requires LuaLaTeX with <code>svg</code> package support. The generated SVGs are
+placed in the build output directory for inclusion in the manuscript.</p>
+<h2 id="anx-figure-composites-figure"><a class="header" href="#anx-figure-composites-figure"><code>anx figure composites [figure]</code></a></h2>
+<p>Assemble composite figures from individual panels.</p>
+<p>Reads the <code>&lt;prefix&gt;_layout.tex</code> output from <code>anx layout solve</code> and
+produces the final multi-panel figure SVGs.</p>
+<h2 id="anx-figure-all-figure"><a class="header" href="#anx-figure-all-figure"><code>anx figure all [figure]</code></a></h2>
+<p>Run all figure steps in sequence:</p>
+<ol>
+<li><code>panels</code> — export matplotlib panels</li>
+<li><code>tikz</code> — compile TikZ to SVG</li>
+<li><code>composites</code> — assemble composite figures</li>
+</ol>
+<h3 id="optional-figure-argument-1"><a class="header" href="#optional-figure-argument-1">Optional figure argument</a></h3>
+<p>If a <code>figure</code> name is given, only that figure is processed. When omitted,
+all figures are processed.</p>
+<pre><code class="language-bash"># Process all figures
+anx figure all
+
+# Process only figure-3
+anx figure all figure-3
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx-build--latex-compilation"><a class="header" href="#anx-build--latex-compilation"><code>anx build</code> — LaTeX compilation</a></h1>
+<h2 id="anx-build-compile"><a class="header" href="#anx-build-compile"><code>anx build compile</code></a></h2>
+<p>Incremental LaTeX compilation via <code>latexmk</code>.</p>
+<p>Runs <code>latexmk</code> with the project’s primary <code>.tex</code> file, automatically
+resolving bibliography, cross-references, and index passes. Only
+recompiles what has changed since the last run.</p>
+<h2 id="anx-build-rebuild"><a class="header" href="#anx-build-rebuild"><code>anx build rebuild</code></a></h2>
+<p>Full pipeline from scratch. Runs the following steps in order:</p>
+<ol>
+<li><strong><code>anx sizes sync</code></strong> — regenerate font and figure-size TeX files</li>
+<li><strong><code>anx layout solve</code></strong> — solve all figure layouts</li>
+<li><strong><code>anx figure all</code></strong> — export panels, compile TikZ, assemble composites</li>
+<li><strong><code>anx build compile</code></strong> — final LaTeX compilation</li>
+</ol>
+<pre><code class="language-bash"># Incremental compile
+anx build compile
+
+# Full rebuild from scratch
+anx build rebuild
+</code></pre>
+<p>Use <code>compile</code> during active writing and <code>rebuild</code> when layout or figure
+definitions have changed.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx-sizes--font-and-figure-size-tex-regeneration"><a class="header" href="#anx-sizes--font-and-figure-size-tex-regeneration"><code>anx sizes</code> — Font and figure-size TeX regeneration</a></h1>
+<h2 id="anx-sizes-sync"><a class="header" href="#anx-sizes-sync"><code>anx sizes sync</code></a></h2>
+<p>Regenerates the <code>fonts.tex</code> and <code>figure_sizes.tex</code> files from Python
+sizing constants.</p>
+<h3 id="source-of-truth"><a class="header" href="#source-of-truth">Source of truth</a></h3>
+<p>All font dimensions and figure size constants are defined in Python
+modules. <code>anx sizes sync</code> reads these Python values and emits
+corresponding LaTeX <code>\def</code> macros so the manuscript typesetting matches
+the sizing used during figure generation.</p>
+<h3 id="generated-files"><a class="header" href="#generated-files">Generated files</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>File</th><th>Contents</th></tr>
+</thead>
+<tbody>
+<tr><td><code>fonts.tex</code></td><td>Font size macros (text, footnotes, captions, etc.)</td></tr>
+<tr><td><code>figure_sizes.tex</code></td><td>Figure dimensions (panel widths, heights, gaps)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="when-to-run"><a class="header" href="#when-to-run">When to run</a></h3>
+<p>Run after changing any sizing constant in Python. This is done
+automatically as part of <code>anx build rebuild</code>.</p>
+<pre><code class="language-bash">anx sizes sync
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx-plot--figure-generation-infrastructure"><a class="header" href="#anx-plot--figure-generation-infrastructure"><code>anx-plot</code> — Figure generation infrastructure</a></h1>
+<p><code>anx-plot</code> provides figure generation infrastructure for the anx article
+toolchain. It ships a shared colour palette (Tol Bright, colourblind-safe),
+sizing constants (single source of truth between Python and LaTeX), drawing
+primitives, solver-driven panel export, and CLI commands.</p>
+<h2 id="submodules"><a class="header" href="#submodules">Submodules</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Module</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#anx_plotsizing--figure-dimensions-and-font-sizes"><code>anx_plot.sizing</code></a></td><td>Figure dimensions, font sizes, resolution</td></tr>
+<tr><td><a href="#anx_plotpalette--colour-palette"><code>anx_plot.palette</code></a></td><td>Paul Tol colour palette and neutrals</td></tr>
+<tr><td><a href="#anx_plothelpers--drawing-primitives-and-layout-solvers"><code>anx_plot.helpers</code></a></td><td>Drawing primitives and layout solvers</td></tr>
+<tr><td><a href="#anx_plotlayout--solver-driven-panel-export"><code>anx_plot.layout</code></a></td><td>Solver-driven panel export</td></tr>
+<tr><td><a href="#anx_plotstandard--high-level-figure-export-framework"><code>anx_plot.standard</code></a></td><td>High-level export framework</td></tr>
+<tr><td><a href="#anx_plotexport--svgpng-export-pipeline"><code>anx_plot.export</code></a></td><td>SVG+PNG export pipeline</td></tr>
+<tr><td><a href="#anx_plotline_style--compact-line-panel-style"><code>anx_plot.line_style</code></a></td><td>Compact line panel style defaults</td></tr>
+<tr><td><a href="#anx_plotsignificance--statistical-annotation-primitives"><code>anx_plot.significance</code></a></td><td>Statistical annotation primitives</td></tr>
+<tr><td><a href="python/cli.html"><code>anx_plot.cli</code></a></td><td>CLI entry points (Typer app)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="cli"><a class="header" href="#cli">CLI</a></h2>
+<pre><code class="language-text">anx-plot panels     Export matplotlib panels at solver-determined dimensions
+anx-plot composites Assemble composite figures from individual panels
+anx-plot sync-sizes Regenerate LaTeX size/font constants from Python sizing
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx_plotsizing--figure-dimensions-and-font-sizes"><a class="header" href="#anx_plotsizing--figure-dimensions-and-font-sizes"><code>anx_plot.sizing</code> — Figure dimensions and font sizes</a></h1>
+<p>Single source of truth for figure geometry, font sizes, and resolution,
+shared between Python figure generation and LaTeX via <code>generate_latex_*</code>.</p>
+<h2 id="page-geometry"><a class="header" href="#page-geometry">Page geometry</a></h2>
+<pre><code class="language-python">PAGE_WIDTH_MM: float       # 210 (A4)
+PAGE_HEIGHT_MM: float      # 297 (A4)
+MARGIN_MM: float           # 25
+LINEWIDTH_MM: float        # PAGE_WIDTH_MM - 2 * MARGIN_MM (160)
+TEXTHEIGHT_MM: float       # PAGE_HEIGHT_MM - 2 * MARGIN_MM (247)
+LINEWIDTH_IN: float        # LINEWIDTH_MM / 25.4
+TEXTHEIGHT_IN: float       # TEXTHEIGHT_MM / 25.4
+FIGWIDTH_IN: float         # LINEWIDTH_IN
+SCALE: float               # 1.0
+MAX_FIG_HEIGHT_IN: float   # (TEXTHEIGHT_MM - 31.0) / 25.4
+</code></pre>
+<h2 id="resolution"><a class="header" href="#resolution">Resolution</a></h2>
+<pre><code class="language-python">DPI_SAVE: int              # 300
+DPI_DISPLAY: int           # 150
+</code></pre>
+<h2 id="font-families"><a class="header" href="#font-families">Font families</a></h2>
+<pre><code class="language-python">FONT_MAIN: str             # "Latin Modern Roman"
+FONT_SANS: str             # "Latin Modern Sans"
+FONT_MONO: str             # "Latin Modern Mono"
+FONT_SANS_FALLBACK: list   # ["LM Sans 10", "Inter", "Helvetica", "Arial"]
+</code></pre>
+<h2 id="font-sizes"><a class="header" href="#font-sizes">Font sizes</a></h2>
+<pre><code class="language-python">FONT_SMALL: float          # 7.0 pt
+FONT_BASE: float           # 8.0 pt
+FONT_LABEL_AXIS: float     # 9.0 pt
+FONT_BIG: float            # 10.0 pt
+FONT_PANEL: float          # 14.0 pt
+FONT_TICK: float           # alias for FONT_SMALL
+FONT_LEGEND: float         # alias for FONT_SMALL
+FONT_AXIS_LABEL: float     # alias for FONT_LABEL_AXIS
+FONT_AXIS_TITLE: float     # alias for FONT_BIG
+</code></pre>
+<h2 id="layout"><a class="header" href="#layout">Layout</a></h2>
+<pre><code class="language-python">SUBPLOT_ADJUST: dict       # {top=0.94, bottom=0.04, left=0.08, right=0.98}
+</code></pre>
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<pre><code class="language-python">constrained_figsize(
+    n_rows: int,
+    row_height_in: float = 2.5,
+    hspace_frac: float = 0.15,
+) -&gt; tuple[float, float]
+</code></pre>
+<p>Compute a figsize that fits within a single A4 page.</p>
+<pre><code class="language-python">generate_latex_fonts(output_path: Path | str) -&gt; None
+</code></pre>
+<p>Write <code>fonts.tex</code> defining <code>\synSmall</code> … <code>\synTitle</code> macros and shared TikZ
+styles (<code>syndb</code>, <code>synbox</code>, <code>synarr</code>, <code>synlbl</code>).</p>
+<pre><code class="language-python">generate_latex_sizes(output_path: Path | str) -&gt; None
+</code></pre>
+<p>Write <code>figure_sizes.tex</code> setting <code>\setkeys{Gin}</code> defaults and
+<code>\maxfigheight</code> in sync with Python constants.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx_plotpalette--colour-palette"><a class="header" href="#anx_plotpalette--colour-palette"><code>anx_plot.palette</code> — Colour palette</a></h1>
+<p>Colourblind-safe qualitative palette based on Paul Tol’s Bright scheme.</p>
+<h2 id="tol-bright"><a class="header" href="#tol-bright">Tol Bright</a></h2>
+<pre><code class="language-python">BLUE: str     # "#4477AA"
+CYAN: str     # "#66CCEE"
+GREEN: str    # "#228833"
+YELLOW: str   # "#CCBB44"
+RED: str      # "#EE6677"
+PURPLE: str   # "#AA3377"
+GREY: str     # "#BBBBBB"
+</code></pre>
+<h2 id="tol-vibrant-extensions"><a class="header" href="#tol-vibrant-extensions">Tol Vibrant extensions</a></h2>
+<pre><code class="language-python">ORANGE: str   # "#EE7733"
+TEAL: str     # "#009988"
+</code></pre>
+<h2 id="neutrals"><a class="header" href="#neutrals">Neutrals</a></h2>
+<pre><code class="language-python">DARK: str         # "#2c3e50"
+GREY_DARK: str    # "#555555"
+GREY_MID: str     # "#888888"
+GREY_LIGHT: str   # "#CCCCCC"
+</code></pre>
+<h2 id="palette-collections"><a class="header" href="#palette-collections">Palette collections</a></h2>
+<pre><code class="language-python">FOREST_COLORS: list[str]   # [BLUE, GREEN, ORANGE, YELLOW, TEAL, PURPLE]
+MOTIF_COLORS: list[str]    # [GREEN, BLUE, YELLOW, PURPLE, RED]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx_plothelpers--drawing-primitives-and-layout-solvers"><a class="header" href="#anx_plothelpers--drawing-primitives-and-layout-solvers"><code>anx_plot.helpers</code> — Drawing primitives and layout solvers</a></h1>
+<p>Shared drawing primitives for composite manuscript figures. All diagram
+coordinates are in normalized axes space <code>[0, 1]</code>.</p>
+<h2 id="diagram-primitives"><a class="header" href="#diagram-primitives">Diagram primitives</a></h2>
+<pre><code class="language-python">diagram_box(
+    ax: plt.Axes,
+    x: float, y: float, w: float, h: float,
+    color: str,
+    *,
+    label: str = "", sublabel: str = "",
+    ec: str = "black", lw: float = 1.2, alpha: float = 1.0, ls: str = "-",
+    label_color: str = "white",
+    sublabel_color: str | None = None,
+    label_size: float = FONT_BASE, sublabel_size: float = FONT_SMALL,
+    pad: float = 0.01, zorder: int = 1,
+) -&gt; None
+</code></pre>
+<p>Draw a rounded rectangle with optional centred label and sublabel.</p>
+<pre><code class="language-python">diagram_arrow(
+    ax: plt.Axes,
+    x1: float, y1: float, x2: float, y2: float,
+    *,
+    color: str = GREY_MID, lw: float = 1.0, style: str = "-&gt;",
+    ms: int = 8, ls: str = "-", zorder: int = 2,
+    **kw,
+) -&gt; None
+</code></pre>
+<p>Draw a <code>FancyArrowPatch</code> between two data-coordinate points.</p>
+<pre><code class="language-python">label_badge(
+    ax: plt.Axes,
+    x: float, y: float, text: str,
+    *,
+    fontsize: float = FONT_BASE, color: str = DARK,
+    **kw,
+) -&gt; None
+</code></pre>
+<p>Small labelled badge (white background, grey border).</p>
+<h2 id="label-abbreviation"><a class="header" href="#label-abbreviation">Label abbreviation</a></h2>
+<pre><code class="language-python">abbreviate_label(value: object, domain: str | None = None) -&gt; str
+</code></pre>
+<p>Return a registered abbreviation for <code>value</code>; preserve unknowns as-is.</p>
+<pre><code class="language-python">abbreviate_labels(values, domain: str | None = None) -&gt; list[str]
+</code></pre>
+<p>Batch abbreviation of labels.</p>
+<h2 id="layout-solvers"><a class="header" href="#layout-solvers">Layout solvers</a></h2>
+<pre><code class="language-python">solve_left_label_margin(
+    ax: plt.Axes,
+    *,
+    min_canvas_margin_pt: float = 2.0,
+    max_left: float | None = None,
+    min_axes_width: float = 0.05,
+) -&gt; None
+</code></pre>
+<p>Iteratively expand <code>left</code> margin so y-axis labels fit inside the figure
+canvas.</p>
+<pre><code class="language-python">solve_bottom_axis_margin(
+    ax: plt.Axes,
+    *,
+    min_canvas_margin_pt: float = 2.0,
+    max_bottom: float | None = None,
+) -&gt; None
+</code></pre>
+<p>Adjust <code>bottom</code> margin so x-axis labels fit inside the canvas.</p>
+<pre><code class="language-python">bottom_legend(
+    ax: plt.Axes,
+    *,
+    ncol: int = 2, left: float = 0.18, right: float = 0.98,
+    min_gap_pt: float = 8.0, min_canvas_margin_pt: float = 2.0,
+    handles=None, labels=None,
+    **legend_kw,
+) -&gt; None
+</code></pre>
+<p>Place a legend centred below the axes, auto-solving minimal bottom margin.</p>
+<h2 id="diagnostics"><a class="header" href="#diagnostics">Diagnostics</a></h2>
+<pre><code class="language-python">check_figure_clipping(
+    fig: plt.Figure,
+    *,
+    tol: float = 0.01,
+) -&gt; list[str]
+</code></pre>
+<p>Check whether any visible artist is clipped by the figure boundary. Returns
+warning strings (empty if clean).</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx_plotlayout--solver-driven-panel-export"><a class="header" href="#anx_plotlayout--solver-driven-panel-export"><code>anx_plot.layout</code> — Solver-driven panel export</a></h1>
+<p>Reads panel dimensions from FigureFit solver reports and exports panels at
+their print-native size.</p>
+<h2 id="type-alias"><a class="header" href="#type-alias">Type alias</a></h2>
+<pre><code class="language-python">PanelDrawFn: Callable[[plt.Axes], None]
+</code></pre>
+<h2 id="functions-1"><a class="header" href="#functions-1">Functions</a></h2>
+<pre><code class="language-python">apply_style() -&gt; None
+</code></pre>
+<p>Apply consistent manuscript styling: Latin Modern Sans, <code>seaborn-v0_8</code>
+theme, font sizes, colour palette.</p>
+<pre><code class="language-python">read_solver_report(
+    report_path: Path,
+) -&gt; dict[str, tuple[float, float, float]]
+</code></pre>
+<p>Parse a FigureFit TOML report into panel dimensions. Returns
+<code>{panel_id: (width_in, height_in, pad_in)}</code>.</p>
+<pre><code class="language-python">export_panels(
+    panel_fns: Mapping[str, PanelDrawFn],
+    output_dir: Path,
+    prefix: str = "CF",
+    *,
+    report: Path | None = None,
+) -&gt; list[Path]
+</code></pre>
+<p>Export each panel as SVG + PNG at solver-determined dimensions. Panel
+letters missing from the solver report are skipped. Returns list of saved
+paths.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx_plotstandard--high-level-figure-export-framework"><a class="header" href="#anx_plotstandard--high-level-figure-export-framework"><code>anx_plot.standard</code> — High-level figure export framework</a></h1>
+<p>Declarative export contracts, panel specs, required-artifact validation,
+heatmap density policies, and common chart finishing for manuscript figures.</p>
+<h2 id="spec-types"><a class="header" href="#spec-types">Spec types</a></h2>
+<pre><code class="language-python">@dataclass(frozen=True)
+class PanelSpec:
+    letter: str
+    draw: PanelDrawFn
+    required: bool = True
+</code></pre>
+<pre><code class="language-python">@dataclass(frozen=True)
+class ArtifactCommand:
+    argv: tuple[str, ...]
+    def render(self) -&gt; str
+</code></pre>
+<p>A shell command stored as argv (diagnostics only).</p>
+<pre><code class="language-python">@dataclass(frozen=True)
+class RequiredArtifact:
+    path: Path
+    description: str
+    producer: str
+    regenerate: ArtifactCommand
+    validate: ArtifactCommand
+</code></pre>
+<p>A production data dependency required before exporting.</p>
+<pre><code class="language-python">@dataclass(frozen=True)
+class FigureExportSpec:
+    prefix: str
+    panels: Mapping[str, PanelDrawFn] | Iterable[PanelSpec]
+    required_artifacts: Iterable[RequiredArtifact] = ()
+</code></pre>
+<p>Declarative export contract for a registered manuscript figure.</p>
+<h2 id="heatmap-density-types"><a class="header" href="#heatmap-density-types">Heatmap density types</a></h2>
+<pre><code class="language-python">@dataclass(frozen=True)
+class HeatmapDensityPolicy:
+    mode: str = "full"
+    min_annotation_cell_width_pt: float = 8.0
+    min_annotation_cell_height_pt: float = 6.0
+    min_x_label_cell_width_pt: float = 6.0
+    min_y_label_cell_height_pt: float = 5.0
+    # ... +tick_labelsize_delta, annotation_size_delta
+</code></pre>
+<p>Print-size policy for dense heatmaps — thin labels/annotations when cells
+are too small.</p>
+<pre><code class="language-python">@dataclass(frozen=True)
+class HeatmapDensityDecision:
+    policy: HeatmapDensityPolicy
+    rows: int; cols: int
+    cell_width_pt: float; cell_height_pt: float
+    tick_labelsize: float; annotation_size: float
+    show_annotations: bool; show_colorbar_label: bool
+    x_tick_step: int; y_tick_step: int
+</code></pre>
+<p>Resolved choices for one rendered heatmap axes.</p>
+<h2 id="annotation-types"><a class="header" href="#annotation-types">Annotation types</a></h2>
+<pre><code class="language-python">@dataclass(frozen=True)
+class AnnotationCandidate:
+    x: float; y: float
+    ha: str = "left"; va: str = "bottom"
+    dx_pt: float = 0.0; dy_pt: float = 0.0
+</code></pre>
+<p>Deterministic candidate for collision-aware annotation placement.</p>
+<pre><code class="language-python">@dataclass(frozen=True)
+class EndpointLabel:
+    x: float; y: float; text: str; color: str
+</code></pre>
+<p>Line endpoint label candidate in data coordinates.</p>
+<h2 id="figure-lifecycle"><a class="header" href="#figure-lifecycle">Figure lifecycle</a></h2>
+<pre><code class="language-python">required_data_error(
+    message: str,
+    *,
+    artifact: Path | str,
+    description: str,
+    producer: str,
+    regenerate: ArtifactCommand | tuple[str, ...] | str,
+    validate: ArtifactCommand | tuple[str, ...] | str,
+) -&gt; RuntimeError
+</code></pre>
+<p>Create a standard required-data failure error.</p>
+<pre><code class="language-python">require_artifacts(artifacts: Iterable[RequiredArtifact]) -&gt; None
+</code></pre>
+<p>Fail with a descriptive error if any required artifact is missing.</p>
+<pre><code class="language-python">panel_mapping(
+    panels: Mapping[str, PanelDrawFn] | Iterable[PanelSpec],
+) -&gt; dict[str, PanelDrawFn]
+</code></pre>
+<p>Normalize panel declarations to the mapping expected by FigureFit export.</p>
+<pre><code class="language-python">export_figure(
+    spec: FigureExportSpec,
+    output_dir: Path,
+    *,
+    prefix: str | None = None,
+) -&gt; list[Path]
+</code></pre>
+<p>Validate required inputs and export a standardized figure spec.</p>
+<pre><code class="language-python">mark_exact_margins(
+    fig: plt.Figure,
+    *,
+    left: float | None = None, right: float | None = None,
+    bottom: float | None = None, top: float | None = None,
+) -&gt; None
+</code></pre>
+<p>Apply fixed margins and opt into exact export boundary validation.</p>
+<pre><code class="language-python">finish_exact_panel(
+    ax: plt.Axes,
+    *,
+    left: float | None = None, right: float | None = None,
+    bottom: float | None = None, top: float | None = None,
+) -&gt; None
+</code></pre>
+<p>Apply fixed panel margins for export-size-sensitive panels. Calls
+<code>mark_exact_margins</code> + <code>solve_left_label_margin</code> + <code>solve_bottom_axis_margin</code>.</p>
+<h2 id="chart-finishing"><a class="header" href="#chart-finishing">Chart finishing</a></h2>
+<pre><code class="language-python">empty_panel(
+    ax: plt.Axes,
+    message: str,
+    *,
+    fontsize: float = FONT_SMALL,
+    color: str = "#666666",
+) -&gt; None
+</code></pre>
+<p>Render the standard diagnostic empty panel (centred text, axes off).</p>
+<pre><code class="language-python">add_colorbar(
+    im: Any,
+    ax: plt.Axes,
+    label: str,
+    *,
+    fraction: float = 0.04,
+    pad: float = 0.015,
+    labelsize: float = FONT_SMALL,
+    tick_labelsize: float | None = None,
+) -&gt; Any
+</code></pre>
+<p>Attach a consistently styled vertical colorbar to a panel.</p>
+<pre><code class="language-python">finish_axes(
+    ax: plt.Axes,
+    *,
+    x_label: str | None = None,
+    y_label: str | None = None,
+    grid_axis: str | None = "y",
+    grid_alpha: float = 0.25,
+    legend: bool = False,
+    legend_loc: str = "best",
+    bottom_legend_cols: int | None = None,
+) -&gt; None
+</code></pre>
+<p>Apply common manuscript chart finishing (labels, grid, tick params, legend).</p>
+<h2 id="annotation-placement"><a class="header" href="#annotation-placement">Annotation placement</a></h2>
+<pre><code class="language-python">place_axes_annotation(
+    ax: plt.Axes,
+    text: str,
+    *,
+    loc: str = "upper right",
+    candidates: Sequence[AnnotationCandidate] | None = None,
+    avoid_artists: Sequence[Artist] = (),
+    avoid_bboxes: Sequence[Bbox] = (),
+    fontsize: float = FONT_SMALL,
+    color: str = "#555555",
+    bbox: Mapping[str, Any] | None = None,
+    min_margin_pt: float = 1.0,
+    required: bool = True,
+    **text_kw,
+) -&gt; Artist | None
+</code></pre>
+<p>Place axes-corner text at the first non-colliding deterministic candidate.</p>
+<pre><code class="language-python">place_data_annotation(
+    ax: plt.Axes,
+    text: str,
+    xy: tuple[float, float],
+    *,
+    candidates: Sequence[AnnotationCandidate] = ...,
+    avoid_artists: Sequence[Artist] = (),
+    avoid_bboxes: Sequence[Bbox] = (),
+    fontsize: float = FONT_SMALL,
+    color: str = "#555555",
+    min_margin_pt: float = 1.0,
+    required: bool = False,
+    arrow: bool = False,
+    **text_kw,
+) -&gt; Artist | None
+</code></pre>
+<p>Place data-anchored text using deterministic offset candidates.</p>
+<pre><code class="language-python">place_endpoint_labels_or_legend(
+    ax: plt.Axes,
+    labels: Sequence[EndpointLabel],
+    *,
+    max_inline: int = 5,
+    max_legend_items: int = 8,
+    legend_title: str | None = None,
+    fontsize: float = FONT_SMALL,
+) -&gt; str
+</code></pre>
+<p>Place endpoint labels or fall back to a compact legend when too dense.
+Returns <code>"inline"</code> or <code>"legend"</code>.</p>
+<pre><code class="language-python">ensure_y_headroom(
+    ax: plt.Axes,
+    values: Sequence[float],
+    *,
+    fraction: float = 0.16,
+) -&gt; None
+</code></pre>
+<p>Expand the y-axis upper limit so marker/endpoint annotations have room.</p>
+<h2 id="heatmap-finishing"><a class="header" href="#heatmap-finishing">Heatmap finishing</a></h2>
+<pre><code class="language-python">finish_heatmap(
+    ax: plt.Axes,
+    rows: Sequence[str],
+    cols: Sequence[str],
+    *,
+    x_rotation: float = 45,
+    tick_labelsize: float = FONT_SMALL - 1,
+    x_ha: str = "right",
+    im: Any | None = None,
+    colorbar_label: str | None = None,
+    colorbar_fraction: float = 0.04,
+    colorbar_pad: float = 0.015,
+    annotations: Iterable[tuple[int, int, str]] | None = None,
+    annotation_size: float = FONT_SMALL - 1,
+    bad_color: str | None = None,
+    boundary_grid: bool = False,
+    boundary_grid_color: str = "#D0D0D0",
+    boundary_grid_linewidth: float = 0.6,
+    y_label_domain: str | None = None,
+    density_policy: HeatmapDensityPolicy | str | None = None,
+) -&gt; None
+</code></pre>
+<p>Apply heatmap ticks, optional annotations, and colorbar styling with
+density-aware thinning.</p>
+<pre><code class="language-python">finish_seaborn_heatmap(
+    ax: plt.Axes,
+    *,
+    x_rotation: float = 45,
+    x_ha: str = "right",
+    y_rotation: float = 0,
+    tick_labelsize: float = FONT_SMALL - 1,
+    colorbar_label: str | None = None,
+    colorbar_tick_labelsize: float | None = None,
+    left: float | None = None,
+    right: float | None = None,
+    bottom: float | None = None,
+    top: float | None = None,
+    annotations: Iterable[tuple[float, float, str]] | None = None,
+    annotation_size: float = FONT_SMALL - 1,
+    annotation_color: str = "black",
+    y_label_domain: str | None = None,
+    density_policy: HeatmapDensityPolicy | str | None = None,
+) -&gt; None
+</code></pre>
+<p>Apply shared styling to a seaborn heatmap after <code>sns.heatmap</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx_plotexport--svgpng-export-pipeline"><a class="header" href="#anx_plotexport--svgpng-export-pipeline"><code>anx_plot.export</code> — SVG+PNG export pipeline</a></h1>
+<p>Saves figures as SVG + rasterized PNG with pre-export boundary guard.</p>
+<h2 id="exceptions"><a class="header" href="#exceptions">Exceptions</a></h2>
+<pre><code class="language-python">class ExportBoundaryError(RuntimeError):
+    ...
+</code></pre>
+<p>Raised when exact-size export would clip publication-relevant artists.</p>
+<h2 id="violation-type"><a class="header" href="#violation-type">Violation type</a></h2>
+<pre><code class="language-python">@dataclass(frozen=True)
+class ExportBoundaryViolation:
+    artist: str
+    sides: tuple[str, ...]
+    gaps_pt: dict[str, float]
+    required_margin_pt: float
+    def describe(self) -&gt; str
+</code></pre>
+<p>A rendered artist that touches or crosses the fixed export canvas.</p>
+<h2 id="functions-2"><a class="header" href="#functions-2">Functions</a></h2>
+<pre><code class="language-python">allow_export_boundary_clip(
+    artist: Artist,
+    reason: str,
+) -&gt; Artist
+</code></pre>
+<p>Mark an artist as intentionally allowed to cross the export boundary.</p>
+<pre><code class="language-python">measure_export_boundary_violations(
+    fig: plt.Figure,
+    *,
+    safety_margin_pt: float = 1.0,
+) -&gt; list[ExportBoundaryViolation]
+</code></pre>
+<p>Measure visible publication artists against the rendered canvas.</p>
+<pre><code class="language-python">validate_export_boundary(
+    fig: plt.Figure,
+    *,
+    safety_margin_pt: float = 1.0,
+    context: str | None = None,
+) -&gt; None
+</code></pre>
+<p>Fail with <code>ExportBoundaryError</code> if exact-size export would place visible
+artists on the boundary.</p>
+<pre><code class="language-python">export_fig(
+    fig: plt.Figure,
+    stem: Path | None,
+    *,
+    pad_inches: float = 0.04,
+) -&gt; plt.Figure
+</code></pre>
+<p>Save figure as SVG + PNG if <code>stem</code> is provided; else return unchanged. PNG
+is rasterized from SVG via Inkscape (with matplotlib fallback). When
+<code>fig._tight_bbox</code> is <code>False</code>, tight bbox is disabled to preserve exact
+figsize.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx_plotline_style--compact-line-panel-style"><a class="header" href="#anx_plotline_style--compact-line-panel-style"><code>anx_plot.line_style</code> — Compact line panel style</a></h1>
+<p>Shared style defaults for dense multi-series line charts.</p>
+<h2 id="style-type"><a class="header" href="#style-type">Style type</a></h2>
+<pre><code class="language-python">@dataclass(frozen=True)
+class LinePanelStyle:
+    line_width: float = 1.0
+    reference_line_width: float = 0.8
+    marker_size: float = 2.5
+    band_alpha: float = 0.10
+    line_alpha: float = 0.85
+    grid_alpha: float = 0.15
+    tick_labelsize: float = FONT_SMALL - 1
+    legend_fontsize: float = FONT_LEGEND - 1
+</code></pre>
+<h2 id="constants"><a class="header" href="#constants">Constants</a></h2>
+<pre><code class="language-python">COMPACT_LINE_STYLE: LinePanelStyle
+</code></pre>
+<p>Default instance of <code>LinePanelStyle()</code>.</p>
+<h2 id="functions-3"><a class="header" href="#functions-3">Functions</a></h2>
+<pre><code class="language-python">plot_series(
+    ax: plt.Axes, x: Any, y: Any,
+    *,
+    color: str,
+    label: str | None = None,
+    marker: str | None = "o",
+    linestyle: str = "-",
+    style: LinePanelStyle = COMPACT_LINE_STYLE,
+    linewidth: float | None = None,
+    markersize: float | None = None,
+    alpha: float | None = None,
+    zorder: int | None = None,
+    **kwargs,
+) -&gt; Any
+</code></pre>
+<p>Plot a single data series with compact defaults.</p>
+<pre><code class="language-python">plot_band(
+    ax: plt.Axes, x: Any, low: Any, high: Any,
+    *,
+    color: str,
+    style: LinePanelStyle = COMPACT_LINE_STYLE,
+    alpha: float | None = None,
+    label: str | None = None,
+    zorder: int | None = None,
+    **kwargs,
+) -&gt; Any
+</code></pre>
+<p>Plot a filled uncertainty band via <code>ax.fill_between</code>.</p>
+<pre><code class="language-python">finish_line_panel(
+    ax: plt.Axes,
+    *,
+    x_label: str | None = None,
+    y_label: str | None = None,
+    log_x: bool = False,
+    log_y: bool = False,
+    grid_axis: str | None = None,
+    legend: bool | Mapping[str, Any] = False,
+    bottom_legend_cols: int | None = None,
+    bottom_legend_kwargs: Mapping[str, Any] | None = None,
+    margins: Mapping[str, float] | None = None,
+    style: LinePanelStyle = COMPACT_LINE_STYLE,
+) -&gt; None
+</code></pre>
+<p>Apply consistent finishing (log scales, labels, ticks, grid, legend, exact
+margins) to a line panel.</p>
+<pre><code class="language-python">compact_legend_kwargs(
+    *,
+    style: LinePanelStyle = COMPACT_LINE_STYLE,
+    **overrides: Any,
+) -&gt; dict[str, Any]
+</code></pre>
+<p>Return keyword arguments for a compact legend.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="anx_plotsignificance--statistical-annotation-primitives"><a class="header" href="#anx_plotsignificance--statistical-annotation-primitives"><code>anx_plot.significance</code> — Statistical annotation primitives</a></h1>
+<p>Functions for formatting and annotating statistical significance on
+manuscript figures.</p>
+<h2 id="formatting"><a class="header" href="#formatting">Formatting</a></h2>
+<pre><code class="language-python">format_pvalue(p: float, *, style: str = "stars") -&gt; str
+</code></pre>
+<p>Format a p-value for display. <code>style="stars"</code> returns <code>"***"</code>/<code>"**"</code>/<code>"*"</code>/
+<code>"ns"</code>; <code>style="text"</code> returns <code>"$p &lt; 0.001$"</code> or <code>"$p = 0.023$"</code>.</p>
+<pre><code class="language-python">format_statistic(
+    value: float,
+    *,
+    precision: int = 2,
+    fallback: str = "n/a",
+) -&gt; str
+</code></pre>
+<p>Format a numeric statistic value with given precision.</p>
+<h2 id="correction"><a class="header" href="#correction">Correction</a></h2>
+<pre><code class="language-python">correct_pvalues(
+    pvalues: list[float],
+    method: str = "holm",
+) -&gt; list[float]
+</code></pre>
+<p>Apply multiple-comparison correction. Methods: <code>"holm"</code> (default),
+<code>"bonferroni"</code>, <code>"fdr_bh"</code> (Benjamini-Hochberg).</p>
+<h2 id="annotation"><a class="header" href="#annotation">Annotation</a></h2>
+<pre><code class="language-python">significance_bracket(
+    ax: plt.Axes,
+    x1: float, x2: float, y: float,
+    p: float,
+    *,
+    height: float = 0.02,
+    style: str = "stars",
+    fontsize: float = FONT_SMALL,
+    color: str = GREY_DARK,
+    lw: float = 0.8,
+) -&gt; None
+</code></pre>
+<p>Draw a significance bracket between two x-positions with a star/text label.</p>
+<pre><code class="language-python">annotate_omnibus(
+    ax: plt.Axes,
+    test_name: str,
+    statistic: float,
+    p: float,
+    *,
+    loc: str = "upper right",
+    fontsize: float = FONT_SMALL,
+    color: str = GREY_DARK,
+) -&gt; None
+</code></pre>
+<p>Place an omnibus test result as corner text (e.g. <code>"ANOVA: F=12.3, p&lt;0.001"</code>).</p>
+<pre><code class="language-python">heatmap_stars(
+    ax: plt.Axes,
+    p_matrix: np.ndarray,
+    *,
+    thresholds: tuple[float, ...] = (0.001, 0.01, 0.05),
+    fontsize: float = FONT_SMALL,
+    color: str = "white",
+    offset_y: float = 0.15,
+) -&gt; None
+</code></pre>
+<p>Overlay significance stars on an existing heatmap.</p>
+<pre><code class="language-python">annotate_regression(
+    ax: plt.Axes,
+    r_squared: float,
+    p: float,
+    *,
+    loc: str = "upper left",
+    fontsize: float = FONT_SMALL,
+    color: str = GREY_DARK,
+) -&gt; None
+</code></pre>
+<p>Place an R² + p-value annotation in a corner.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="plugin-system"><a class="header" href="#plugin-system">Plugin System</a></h1>
+<h2 id="convention"><a class="header" href="#convention">Convention</a></h2>
+<p>A plugin is an executable binary named <code>anx-plugin-&lt;name&gt;</code> discovered on
+<code>$PATH</code>. When invoked, anx passes a JSON context object via <code>--plugin-context</code>
+and reads a JSON result from stdout.</p>
+<h2 id="protocol"><a class="header" href="#protocol">Protocol</a></h2>
+<h3 id="invocation"><a class="header" href="#invocation">Invocation</a></h3>
+<pre><code class="language-console">anx-plugin-&lt;name&gt; --plugin-context '&lt;json&gt;'
+</code></pre>
+<h3 id="input-json"><a class="header" href="#input-json">Input JSON</a></h3>
+<pre><code class="language-json">{
+  "action": "string",
+  "paths": {},
+  "metadata": {}
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>action</code></td><td><code>string</code></td><td>Operation to perform</td></tr>
+<tr><td><code>paths</code></td><td><code>object</code></td><td>File paths relevant to the action</td></tr>
+<tr><td><code>metadata</code></td><td><code>object</code></td><td>Arbitrary action-specific data</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="output-json-stdout"><a class="header" href="#output-json-stdout">Output JSON (stdout)</a></h3>
+<p>On success:</p>
+<pre><code class="language-json">{ "success": true, ... }
+</code></pre>
+<p>On failure:</p>
+<pre><code class="language-json">{ "success": false, "error": "message" }
+</code></pre>
+<p>The plugin exits with code 0 on success, non-zero on failure. Stderr is
+captured and reported on failures.</p>
+<h2 id="discovery"><a class="header" href="#discovery">Discovery</a></h2>
+<p>Anx checks <code>$PATH</code> for executables matching <code>anx-plugin-&lt;name&gt;</code>. If a binary
+is listed in <code>[plugins] enabled</code> but not found, anx reports the error and
+continues.</p>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
+<p>Enable plugins in <code>article.toml</code>:</p>
+<pre><code class="language-toml">[plugins]
+enabled = ["zenodo", "pandoc"]
+</code></pre>
+<h2 id="available-plugins"><a class="header" href="#available-plugins">Available Plugins</a></h2>
+<h3 id="zenodo"><a class="header" href="#zenodo">zenodo</a></h3>
+<p><strong>Binary</strong>: <code>anx-plugin-zenodo</code> (Rust)</p>
+<p>Zenodo archival plugin supporting OAuth login, deposition creation, DOI
+reservation, file upload, and publication through the Zenodo API.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Action</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>oauth-login</code></td><td>OAuth 2.0 device flow — opens browser</td></tr>
+<tr><td><code>deposit-create</code></td><td>Create a new draft deposition</td></tr>
+<tr><td><code>reserve-doi</code></td><td>Reserve a DOI for the draft</td></tr>
+<tr><td><code>upload-file</code></td><td>Upload a file to the deposition bucket</td></tr>
+<tr><td><code>publish</code></td><td>Publish the completed deposition</td></tr>
+</tbody>
+</table>
+</div>
+<p>Supports both production (<code>zenodo.org</code>) and sandbox
+(<code>sandbox.zenodo.org</code>) via the <code>metadata.sandbox</code> flag.</p>
+<h3 id="pandoc"><a class="header" href="#pandoc">pandoc</a></h3>
+<p><strong>Binary</strong>: <code>anx-plugin-pandoc</code> (Python)</p>
+<p>Pandoc ODT export plugin that converts a LaTeX manuscript to ODT format with
+composite figure injection and bibliography support.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Action</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>export-odt</code></td><td>Convert LaTeX manuscript to ODT</td></tr>
+</tbody>
+</table>
+</div>
+<p>Context fields:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>article_dir</code></td><td>—</td><td>Article root directory</td></tr>
+<tr><td><code>tex_main</code></td><td>—</td><td>LaTeX main file (relative)</td></tr>
+<tr><td><code>output</code></td><td>—</td><td>Desired ODT filename (relative)</td></tr>
+<tr><td><code>pandoc_binary</code></td><td><code>"pandoc"</code></td><td>Pandoc executable</td></tr>
+<tr><td><code>bibliography</code></td><td><code>"references.bib"</code></td><td>BibTeX file (relative)</td></tr>
+<tr><td><code>lua_filter</code></td><td>—</td><td>Lua filter for figure injection</td></tr>
+<tr><td><code>reference_odt</code></td><td>—</td><td>Reference style ODT (relative)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="writing-a-plugin"><a class="header" href="#writing-a-plugin">Writing a Plugin</a></h2>
+<p>Create an executable that:</p>
+<ol>
+<li>Accepts <code>--plugin-context &lt;json&gt;</code>.</li>
+<li>Parses the JSON context to determine the action.</li>
+<li>Performs the operation.</li>
+<li>Writes a JSON result to stdout.</li>
+<li>Exits with code 0 on success, non-zero on failure.</li>
+</ol>
+<p>Example skeleton in Python:</p>
+<pre><code class="language-python">#!/usr/bin/env python
+import argparse, json, sys
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--plugin-context", required=True)
+    args = parser.parse_args()
+    ctx = json.loads(args.plugin_context)
+
+    try:
+        if ctx["action"] == "my-action":
+            result = {"success": True, "message": "done"}
+        else:
+            result = {"success": False, "error": f"unknown action: {ctx['action']}"}
+    except Exception as e:
+        result = {"success": False, "error": str(e)}
+
+    json.dump(result, sys.stdout)
+    sys.exit(0 if result["success"] else 1)
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+<p>Name the binary <code>anx-plugin-my-plugin</code>, place it on <code>$PATH</code>, and add
+<code>"my-plugin"</code> to <code>[plugins] enabled</code>.</p>
+<h2 id="nix-packaging"><a class="header" href="#nix-packaging">Nix Packaging</a></h2>
+<p>Plugins are built as separate derivations and included in the toolchain
+via <code>symlinkJoin</code>:</p>
+<pre><code class="language-nix">pkgs.symlinkJoin {
+  name = "anx-toolchain";
+  paths = [ anx anx-plot figurefit anx-plugin-zenodo anx-plugin-pandoc ];
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="configuration-1"><a class="header" href="#configuration-1">Configuration</a></h1>
+<p>The <code>article.toml</code> file is the project manifest. It is searched upward from the
+current directory.</p>
+<h2 id="article-section"><a class="header" href="#article-section"><code>[article]</code> Section</a></h2>
+<pre><code class="language-toml">[article]
+name = "my-article"
+tex-main = "manuscript.tex"
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td><code>"article"</code></td><td>Project name</td></tr>
+<tr><td><code>tex-main</code></td><td><code>"manuscript.tex"</code></td><td>Path to the main LaTeX file</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="figures-section"><a class="header" href="#figures-section"><code>[figures]</code> Section</a></h2>
+<pre><code class="language-toml">[figures]
+registry = "figures.toml"
+layouts = "figures/layouts"
+panels = "figures/panels"
+composites = "figures/composites"
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>registry</code></td><td><code>"figures.toml"</code></td><td>Figure registry file</td></tr>
+<tr><td><code>layouts</code></td><td><code>"figures/layouts"</code></td><td>Directory for FigureFit layout TOMLs</td></tr>
+<tr><td><code>panels</code></td><td><code>"figures/panels"</code></td><td>Output directory for generated panels</td></tr>
+<tr><td><code>composites</code></td><td><code>"figures/composites"</code></td><td>Output directory for composites</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="tools-section"><a class="header" href="#tools-section"><code>[tools]</code> Section</a></h2>
+<pre><code class="language-toml">[tools]
+figurefit = "figurefit"
+python = "uv run python"
+latexmk = "latexmk"
+lualatex = "lualatex"
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>figurefit</code></td><td><code>"figurefit"</code></td><td>FigureFit binary path or name</td></tr>
+<tr><td><code>python</code></td><td><code>"uv run python"</code></td><td>Python interpreter command</td></tr>
+<tr><td><code>latexmk</code></td><td><code>"latexmk"</code></td><td>latexmk command</td></tr>
+<tr><td><code>lualatex</code></td><td><code>"lualatex"</code></td><td>lualatex command</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="sizing-section"><a class="header" href="#sizing-section"><code>[sizing]</code> Section</a></h2>
+<pre><code class="language-toml">[sizing]
+page-width-mm = 210
+page-height-mm = 297
+margin-mm = 25
+font-main = "Latin Modern Roman"
+font-sans = "Latin Modern Sans"
+font-mono = "Latin Modern Mono"
+font-small = 7.0
+font-base = 8.0
+font-label-axis = 9.0
+font-big = 10.0
+font-panel = 14.0
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>page-width-mm</code></td><td><code>210</code></td><td>Page width in mm</td></tr>
+<tr><td><code>page-height-mm</code></td><td><code>297</code></td><td>Page height in mm</td></tr>
+<tr><td><code>margin-mm</code></td><td><code>25</code></td><td>Margin in mm</td></tr>
+<tr><td><code>font-main</code></td><td><code>"Latin Modern Roman"</code></td><td>Serif font family</td></tr>
+<tr><td><code>font-sans</code></td><td><code>"Latin Modern Sans"</code></td><td>Sans-serif font family</td></tr>
+<tr><td><code>font-mono</code></td><td><code>"Latin Modern Mono"</code></td><td>Monospace font family</td></tr>
+<tr><td><code>font-small</code></td><td><code>7.0</code></td><td>Small font size (pt)</td></tr>
+<tr><td><code>font-base</code></td><td><code>8.0</code></td><td>Base font size (pt)</td></tr>
+<tr><td><code>font-label-axis</code></td><td><code>9.0</code></td><td>Axis label font size (pt)</td></tr>
+<tr><td><code>font-big</code></td><td><code>10.0</code></td><td>Title/large font size (pt)</td></tr>
+<tr><td><code>font-panel</code></td><td><code>14.0</code></td><td>Panel letter font size (pt)</td></tr>
+</tbody>
+</table>
+</div>
+<p>These values match the constants in <code>anx_plot.sizing</code> and are the single source
+of truth. Run <code>anx sizes sync</code> to regenerate <code>tikz/fonts.tex</code> and
+<code>figure_sizes.tex</code> from these settings.</p>
+<h2 id="plugins-section"><a class="header" href="#plugins-section"><code>[plugins]</code> Section</a></h2>
+<pre><code class="language-toml">[plugins]
+enabled = ["zenodo", "pandoc"]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>enabled</code></td><td><code>[]</code></td><td>List of plugin names to activate</td></tr>
+</tbody>
+</table>
+</div>
+<p>Each name must correspond to an <code>anx-plugin-&lt;name&gt;</code> binary on <code>$PATH</code>. See
+<a href="#plugin-system">Plugins</a> for details.</p>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
+<p>Minimal complete configuration:</p>
+<pre><code class="language-toml">[article]
+name = "my-article"
+tex-main = "manuscript.tex"
+
+[figures]
+registry = "figures.toml"
+layouts = "figures/layouts"
+panels = "figures/panels"
+composites = "figures/composites"
+
+[tools]
+figurefit = "figurefit"
+python = "uv run python"
+latexmk = "latexmk"
+lualatex = "lualatex"
+</code></pre>
+<p>All sections are optional — missing values fall back to the defaults shown
+above.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="contributing"><a class="header" href="#contributing">Contributing</a></h1>
+<h2 id="development-setup"><a class="header" href="#development-setup">Development Setup</a></h2>
+<pre><code class="language-bash">git clone https://codeberg.org/caniko/nix-article.git
+cd nix-article
+</code></pre>
+<h3 id="nix-recommended"><a class="header" href="#nix-recommended">Nix (recommended)</a></h3>
+<pre><code class="language-bash">nix develop
+</code></pre>
+<p>This provides Rust toolchain, Python with <code>uv</code>, TeX Live, Inkscape, and <code>figurefit</code>.</p>
+<h3 id="without-nix"><a class="header" href="#without-nix">Without Nix</a></h3>
+<pre><code class="language-bash"># Rust CLI
+cargo build --package anx
+
+# Python package
+cd python
+uv sync
+</code></pre>
+<h2 id="project-structure"><a class="header" href="#project-structure">Project Structure</a></h2>
+<pre><code>nix-article/
+├── src/                     # Rust CLI (anx)
+├── python/                  # Python package (anx-plot)
+│   └── src/anx_plot/
+├── nix/                     # Nix build expressions
+│   ├── rust.nix
+│   ├── python.nix
+│   └── dev-shell.nix
+├── plugins/                 # anx-plugin-* packages
+│   ├── zenodo/              # anx-plugin-zenodo (Rust)
+│   └── pandoc/              # anx-plugin-pandoc (Python)
+├── tikz/                    # Shared TikZ infrastructure
+├── fixtures/demo-article/   # Testable demo project
+├── docs/                    # mdBook documentation
+└── flake.nix                # Flake entry point
+</code></pre>
+<h2 id="testing"><a class="header" href="#testing">Testing</a></h2>
+<pre><code class="language-bash"># Rust tests
+cargo test --package anx
+
+# Python tests
+cd python &amp;&amp; uv run pytest
+
+# All checks (Nix)
+nix flake check
+</code></pre>
+<h2 id="code-style"><a class="header" href="#code-style">Code Style</a></h2>
+<ul>
+<li>Rust: <code>cargo fmt</code> + <code>cargo clippy -- --deny warnings</code></li>
+<li>Python: <code>ruff format</code> + <code>ruff check</code></li>
+<li>Nix: <code>nix fmt</code></li>
+</ul>
+<h2 id="pull-requests"><a class="header" href="#pull-requests">Pull Requests</a></h2>
+<ol>
+<li>Ensure <code>nix flake check</code> passes</li>
+<li>Add tests for new functionality</li>
+<li>Update documentation for API changes</li>
+<li>Keep commits atomic and well-described</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>

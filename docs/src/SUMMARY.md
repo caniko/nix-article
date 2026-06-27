@@ -17,6 +17,8 @@
     - [layout](python/layout.md)
     - [standard](python/standard.md)
     - [export](python/export.md)
+    - [line_style](python/line_style.md)
+    - [significance](python/significance.md)
 - [Plugin System](plugins.md)
 - [Configuration](configuration.md)
 - [Contributing](contributing.md)
