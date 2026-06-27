@@ -23,6 +23,7 @@ from .helpers import (
     solve_left_label_margin,
 )
 from .layout import export_panels as _export_panels_impl
+from .helpers import abbreviate_labels
 from .palette import GREY_LIGHT
 
 PanelDrawFn = Callable[[plt.Axes], None]
@@ -769,10 +770,8 @@ def finish_heatmap(
         density_policy=density_policy,
     )
     ax._anx_heatmap_density_decision = decision
-    row_labels = _thin_heatmap_labels(
-        [str(label) for label in rows],
-        decision.y_tick_step,
-    )
+    row_labels = abbreviate_labels(rows, domain=y_label_domain)
+    row_labels = _thin_heatmap_labels(row_labels, decision.y_tick_step)
     col_labels = _thin_heatmap_labels(
         [str(col) for col in cols],
         decision.x_tick_step,
