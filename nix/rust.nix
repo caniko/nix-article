@@ -13,6 +13,7 @@
         ../Cargo.toml
         ../Cargo.lock
         ../src
+        ../plugins/zenodo
       ];
     };
     strictDeps = true;
