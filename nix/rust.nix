@@ -20,10 +20,8 @@
     nativeBuildInputs = [];
     cargoExtraArgs = "--package anx";
 
-    # figurefit is a runtime dependency, not a build one
     postInstall = ''
       mkdir -p $out/bin
-      # The anx binary is already installed by cargo
     '';
   };
 

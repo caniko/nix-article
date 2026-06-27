@@ -58,8 +58,40 @@
         inherit lib;
         python3 = pkgs.python314;
       };
+
+      pluginSrc = lib.fileset.toSource {
+        root = ./.;
+        fileset = lib.fileset.unions [
+          ./Cargo.toml
+          ./Cargo.lock
+          ./plugins/zenodo
+        ];
+      };
+
+      anx-plugin-zenodo = let
+        pcommon = {
+          pname = "anx-plugin-zenodo";
+          version = "0.1.0";
+          src = craneLib.cleanCargoSource pluginSrc;
+          strictDeps = true;
+          buildInputs = [];
+          nativeBuildInputs = [];
+          cargoExtraArgs = "--package anx-plugin-zenodo";
+        };
+        cargoArtifacts = craneLib.buildDepsOnly pcommon;
+      in
+        craneLib.buildPackage (pcommon // {inherit cargoArtifacts; meta.mainProgram = "anx-plugin-zenodo";});
+
+      anx-plugin-pandoc = pkgs.python314.pkgs.buildPythonPackage {
+        pname = "anx-plugin-pandoc";
+        version = "0.1.0";
+        pyproject = true;
+        src = ./plugins/pandoc;
+        nativeBuildInputs = [pkgs.python314.pkgs.hatchling];
+        meta.description = "Pandoc ODT export plugin for anx";
+      };
     in {
-      inherit anx anx-plot;
+      inherit anx anx-plot anx-plugin-zenodo anx-plugin-pandoc;
 
       figurefit = figurefit.packages.${system}.default;
 
@@ -148,6 +180,13 @@
         ];
       } ''
         python -c "import anx_plot; print('anx-plot import OK')"
+        touch $out
+      '';
+
+      pandoc-plugin-test = pkgs.runCommand "pandoc-plugin-test" {
+        buildInputs = [self.packages.${system}.anx-plugin-pandoc];
+      } ''
+        python -c "from anx_plugin_pandoc import main; print('import OK')"
         touch $out
       '';
     });

@@ -1,3 +1,7 @@
+[workspace]
+members = ["plugins/zenodo"]
+resolver = "2"
+
 [package]
 name = "anx"
 version = "0.1.0"
