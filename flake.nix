@@ -57,6 +57,8 @@
     in {
       inherit anx anx-plot;
 
+      figurefit = figurefit.packages.${system}.default;
+
       default = pkgs.symlinkJoin {
         name = "anx-toolchain";
         paths = [
