@@ -39,4 +39,4 @@
     };
   };
 in
-  py.anx-plot
+  py.pkgs.anx-plot

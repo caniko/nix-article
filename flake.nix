@@ -9,8 +9,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    crane = {
+      url = "github:ipetkov/crane";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     figurefit = {
-      url = "https://codeberg.org/caniko/FigureFit.git";
+      url = "git+https://codeberg.org/caniko/FigureFit.git";
     };
   };
 
@@ -18,6 +23,7 @@
     self,
     nixpkgs,
     rust-overlay,
+    crane,
     figurefit,
   }: let
     systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
@@ -25,6 +31,7 @@
     forAllSystems = f:
       nixpkgs.lib.genAttrs systems (system:
         f {
+          inherit system;
           pkgs = import nixpkgs {
             inherit system;
             overlays = [rust-overlay.overlays.default];
@@ -37,12 +44,9 @@
         extensions = ["rust-src" "rustfmt" "clippy"];
       };
     in
-      (pkgs.callPackage pkgs.craneLib {
-        rustc = rustToolchain;
-        cargo = rustToolchain;
-      });
+      (crane.mkLib pkgs).overrideToolchain rustToolchain;
   in {
-    packages = forAllSystems ({pkgs, lib}: let
+    packages = forAllSystems ({pkgs, lib, system}: let
       craneLib = mkCraneLib {inherit pkgs;};
 
       anx = pkgs.callPackage ./nix/rust.nix {
@@ -76,7 +80,7 @@
       };
     });
 
-    devShells = forAllSystems ({pkgs, lib}: let
+    devShells = forAllSystems ({pkgs, lib, system}: let
       craneLib = mkCraneLib {inherit pkgs;};
       anx = self.packages.${system}.anx;
       anx-plot = pkgs.callPackage ./nix/python.nix {
@@ -90,7 +94,7 @@
       };
     });
 
-    lib = forAllSystems ({pkgs, lib}: rec {
+    lib = forAllSystems ({pkgs, lib, system}: rec {
       figurefitPkg = figurefit.packages.${system}.default;
 
       mkArticleDevShell = {
@@ -108,22 +112,31 @@
         };
     });
 
-    checks = forAllSystems ({pkgs, lib}: let
+    checks = forAllSystems ({pkgs, lib, system}: let
       craneLib = mkCraneLib {inherit pkgs;};
-    in rec {
+
+      commonArgs = {
+        src = craneLib.cleanCargoSource ./.;
+        strictDeps = true;
+        buildInputs = [];
+        nativeBuildInputs = [];
+      };
+
+      cargoArtifacts = craneLib.buildDepsOnly commonArgs;
+    in {
       rust-fmt = craneLib.cargoFmt {
         src = craneLib.cleanCargoSource ./.;
       };
 
-      rust-clippy = craneLib.cargoClippy {
-        src = craneLib.cleanCargoSource ./.;
+      rust-clippy = craneLib.cargoClippy (commonArgs // {
+        inherit cargoArtifacts;
         cargoClippyExtraArgs = "--package anx -- --deny warnings";
-      };
+      });
 
-      rust-doc = craneLib.cargoDoc {
-        src = craneLib.cleanCargoSource ./.;
+      rust-doc = craneLib.cargoDoc (commonArgs // {
+        inherit cargoArtifacts;
         cargoDocExtraArgs = "--no-deps --package anx";
-      };
+      });
 
       python-test = pkgs.runCommand "anx-plot-test" {
         buildInputs = [
