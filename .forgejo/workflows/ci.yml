@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: atlas-nix-trusted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run flake checks
+        run: nix flake check
+
+  test:
+    runs-on: atlas
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build anx CLI
+        run: cargo build --package anx
+
+      - name: Run Rust tests
+        run: cargo test --package anx
+
+      - name: Run Python tests
+        working-directory: python
+        run: uv sync --frozen && uv run pytest
+
+  docs:
+    runs-on: atlas-nix-trusted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build docs
+        run: nix build .#docs

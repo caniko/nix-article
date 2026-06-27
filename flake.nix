@@ -100,15 +100,16 @@
         pname = "anx-docs";
         version = "0.1.0";
         src = lib.fileset.toSource {
-          root = ./docs;
+          root = ./.;
           fileset = lib.fileset.unions [
-            ./book.toml
-            ./src
+            ./docs/book.toml
+            ./docs/src
           ];
         };
         nativeBuildInputs = [pkgs.mdbook];
+        sourceRoot = ".";
         buildPhase = ''
-          mdbook build . --dest-dir docs-book
+          mdbook build docs --dest-dir docs-book
         '';
         installPhase = ''
           mkdir -p $out
