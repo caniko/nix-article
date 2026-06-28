@@ -80,8 +80,8 @@
           version = "0.1.0";
           src = craneLib.cleanCargoSource pluginSrc;
           strictDeps = true;
-          buildInputs = [];
-          nativeBuildInputs = [];
+          buildInputs = [pkgs.openssl];
+          nativeBuildInputs = [pkgs.pkg-config];
           cargoExtraArgs = "--package anx-plugin-zenodo";
         };
         cargoArtifacts = craneLib.buildDepsOnly pcommon;
@@ -258,6 +258,12 @@
         python -c "from anx_plugin_pandoc import main; print('import OK')"
         touch $out
       '';
+    });
+
+    apps = forAllSystems ({pkgs, lib, system}: {
+      deploy-pages = plinth.lib.${system}.mkDeployPagesApp {
+        domain = "nix-article.tartanoglu.com";
+      };
     });
   };
 }
