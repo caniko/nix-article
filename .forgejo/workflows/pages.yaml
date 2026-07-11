@@ -16,6 +16,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build site
         run: nix build .#site
+      - name: Validate Pages domain
+        run: |
+          nix build .#site --no-link --out-link result-pages-site
+          test -f result-pages-site/.domains
+          grep -qx nix-article.tartanoglu.com result-pages-site/.domains
       - name: Deploy to Codeberg Pages
         env:
           GIT_AUTHOR_NAME: forgejo-actions
