@@ -2,6 +2,7 @@
   description = "anx: article toolchain — figure layout, generation, and manuscript building";
 
   inputs = {
+    rs-harbor.url = "git+https://codeberg.org/caniko/rs-harbor.git?ref=trunk&rev=9bfa8bdb0ecb22d7bc11448665f7fbaebae7a759";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     rust-overlay = {
@@ -26,6 +27,7 @@
 
   outputs = {
     self,
+    rs-harbor,
     nixpkgs,
     rust-overlay,
     crane,
@@ -38,11 +40,11 @@
       nixpkgs.lib.genAttrs systems (system:
         f {
           inherit system;
-          pkgs = import nixpkgs {
+      pkgs = import nixpkgs {
             inherit system;
             overlays = [rust-overlay.overlays.default];
           };
-          lib = nixpkgs.lib;
+      lib = nixpkgs.lib;
         });
 
     mkCraneLib = {pkgs, ...}: let
@@ -54,9 +56,16 @@
   in {
     packages = forAllSystems ({pkgs, lib, system}: let
       craneLib = mkCraneLib {inherit pkgs;};
+      buildCache = rs-harbor.lib.mkBuildCachePolicy {
+        inherit pkgs;
+        sccachePackage = rs-harbor.packages.${system}.sccache;
+        cacheRoot = null;
+        namespaceScope = "canix-rust";
+        namespaceGeneration = 5;
+      };
 
       anx = pkgs.callPackage ./nix/rust.nix {
-        inherit lib craneLib;
+        inherit lib craneLib buildCache;
         figurefit = figurefit.packages.${system}.default;
       };
 
@@ -86,7 +95,9 @@
         };
         cargoArtifacts = craneLib.buildDepsOnly pcommon;
       in
-        craneLib.buildPackage (pcommon // {inherit cargoArtifacts; meta.mainProgram = "anx-plugin-zenodo";});
+        buildCache.withRustCache {
+          package = craneLib.buildPackage (pcommon // {inherit cargoArtifacts; meta.mainProgram = "anx-plugin-zenodo";});
+        };
 
       anx-plugin-pandoc = pkgs.python314.pkgs.buildPythonPackage {
         pname = "anx-plugin-pandoc";

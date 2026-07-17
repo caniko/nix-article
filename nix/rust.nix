@@ -1,6 +1,7 @@
 {
   lib,
   craneLib,
+  buildCache,
   figurefit,
   ...
 }: let
@@ -28,12 +29,14 @@
 
   cargoArtifacts = craneLib.buildDepsOnly commonArgs;
 in
-  craneLib.buildPackage (commonArgs
-    // {
-      inherit cargoArtifacts;
-      meta = {
-        description = "Article toolchain CLI";
-        license = lib.licenses.asl20;
-        mainProgram = "anx";
-      };
-    })
+  buildCache.withRustCache {
+    package = craneLib.buildPackage (commonArgs
+      // {
+        inherit cargoArtifacts;
+        meta = {
+          description = "Article toolchain CLI";
+          license = lib.licenses.asl20;
+          mainProgram = "anx";
+        };
+      });
+  }
