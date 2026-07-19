@@ -4,6 +4,10 @@
   inputs = {
     rs-harbor.url = "git+https://codeberg.org/caniko/rs-harbor.git?ref=trunk&rev=9bfa8bdb0ecb22d7bc11448665f7fbaebae7a759";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    tex-harbor = {
+      url = "git+https://codeberg.org/caniko/tex-harbor.git?ref=trunk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -29,6 +33,7 @@
     self,
     rs-harbor,
     nixpkgs,
+    tex-harbor,
     rust-overlay,
     crane,
     plinth,
@@ -40,11 +45,11 @@
       nixpkgs.lib.genAttrs systems (system:
         f {
           inherit system;
-      pkgs = import nixpkgs {
+          pkgs = import nixpkgs {
             inherit system;
             overlays = [rust-overlay.overlays.default];
           };
-      lib = nixpkgs.lib;
+          lib = nixpkgs.lib;
         });
 
     mkCraneLib = {pkgs, ...}: let
@@ -54,7 +59,11 @@
     in
       (crane.mkLib pkgs).overrideToolchain rustToolchain;
   in {
-    packages = forAllSystems ({pkgs, lib, system}: let
+    packages = forAllSystems ({
+      pkgs,
+      lib,
+      system,
+    }: let
       craneLib = mkCraneLib {inherit pkgs;};
       buildCache = rs-harbor.lib.mkBuildCachePolicy {
         inherit pkgs;
@@ -96,7 +105,11 @@
         cargoArtifacts = craneLib.buildDepsOnly pcommon;
       in
         buildCache.withRustCache {
-          package = craneLib.buildPackage (pcommon // {inherit cargoArtifacts; meta.mainProgram = "anx-plugin-zenodo";});
+          package = craneLib.buildPackage (pcommon
+            // {
+              inherit cargoArtifacts;
+              meta.mainProgram = "anx-plugin-zenodo";
+            });
         };
 
       anx-plugin-pandoc = pkgs.python314.pkgs.buildPythonPackage {
@@ -191,7 +204,11 @@
       };
     });
 
-    devShells = forAllSystems ({pkgs, lib, system}: let
+    devShells = forAllSystems ({
+      pkgs,
+      lib,
+      system,
+    }: let
       craneLib = mkCraneLib {inherit pkgs;};
       anx = self.packages.${system}.anx;
       anx-plot = pkgs.callPackage ./nix/python.nix {
@@ -200,21 +217,22 @@
       };
     in {
       default = pkgs.callPackage ./nix/dev-shell.nix {
-        inherit lib pkgs anx anx-plot;
+        inherit lib pkgs anx anx-plot tex-harbor;
         figurefit = figurefit.packages.${system}.default;
         plinthProject = plinth.packages.${system}.plinth-project;
       };
     });
 
-    lib = forAllSystems ({pkgs, lib, system}: rec {
+    lib = forAllSystems ({
+      pkgs,
+      lib,
+      system,
+    }: rec {
       figurefitPkg = figurefit.packages.${system}.default;
 
-      mkArticleDevShell = {
-        extraPkgs ? [],
-        ...
-      }:
+      mkArticleDevShell = {extraPkgs ? [], ...}:
         pkgs.callPackage ./nix/dev-shell.nix {
-          inherit lib pkgs;
+          inherit lib pkgs tex-harbor extraPkgs;
           anx = self.packages.${system}.anx;
           anx-plot = pkgs.callPackage ./nix/python.nix {
             inherit lib;
@@ -224,7 +242,11 @@
         };
     });
 
-    checks = forAllSystems ({pkgs, lib, system}: let
+    checks = forAllSystems ({
+      pkgs,
+      lib,
+      system,
+    }: let
       craneLib = mkCraneLib {inherit pkgs;};
 
       commonArgs = {
@@ -240,38 +262,46 @@
         src = craneLib.cleanCargoSource ./.;
       };
 
-      rust-clippy = craneLib.cargoClippy (commonArgs // {
-        inherit cargoArtifacts;
-        cargoClippyExtraArgs = "--package anx -- --deny warnings";
-      });
+      rust-clippy = craneLib.cargoClippy (commonArgs
+        // {
+          inherit cargoArtifacts;
+          cargoClippyExtraArgs = "--package anx -- --deny warnings";
+        });
 
-      rust-doc = craneLib.cargoDoc (commonArgs // {
-        inherit cargoArtifacts;
-        cargoDocExtraArgs = "--no-deps --package anx";
-      });
+      rust-doc = craneLib.cargoDoc (commonArgs
+        // {
+          inherit cargoArtifacts;
+          cargoDocExtraArgs = "--no-deps --package anx";
+        });
 
-      python-test = pkgs.runCommand "anx-plot-test" {
-        buildInputs = [
-          (pkgs.callPackage ./nix/python.nix {
-            inherit lib;
-            python3 = pkgs.python314;
-          })
-          pkgs.python314
-        ];
-      } ''
-        python -c "import anx_plot; print('anx-plot import OK')"
-        touch $out
-      '';
+      python-test =
+        pkgs.runCommand "anx-plot-test" {
+          buildInputs = [
+            (pkgs.callPackage ./nix/python.nix {
+              inherit lib;
+              python3 = pkgs.python314;
+            })
+            pkgs.python314
+          ];
+        } ''
+          python -c "import anx_plot; print('anx-plot import OK')"
+          touch $out
+        '';
 
-      pandoc-plugin-test = pkgs.runCommand "pandoc-plugin-test" {
-        buildInputs = [self.packages.${system}.anx-plugin-pandoc];
-      } ''
-        python -c "from anx_plugin_pandoc import main; print('import OK')"
-        touch $out
-      '';
+      pandoc-plugin-test =
+        pkgs.runCommand "pandoc-plugin-test" {
+          buildInputs = [self.packages.${system}.anx-plugin-pandoc];
+        } ''
+          python -c "from anx_plugin_pandoc import main; print('import OK')"
+          touch $out
+        '';
     });
 
-    apps = forAllSystems ({pkgs, lib, system}: {
+    apps = forAllSystems ({
+      pkgs,
+      lib,
+      system,
+    }: {
       deploy-pages = plinth.lib.${system}.mkDeployPagesApp {
         domain = "nix-article.tartanoglu.com";
       };
