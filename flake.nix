@@ -67,7 +67,10 @@
       craneLib = mkCraneLib {inherit pkgs;};
       buildCache = rs-harbor.lib.mkBuildCachePolicy {
         inherit pkgs;
-        sccachePackage = rs-harbor.packages.${system}.sccache;
+        sccachePackage =
+          if builtins.hasAttr system rs-harbor.packages
+          then rs-harbor.packages.${system}.sccache
+          else pkgs.sccache;
         cacheRoot = null;
         namespaceScope = "canix-rust";
         namespaceGeneration = 5;
