@@ -52,10 +52,8 @@
           lib = nixpkgs.lib;
         });
 
-    mkCraneLib = {pkgs, ...}: let
-      rustToolchain = rs-harbor.lib.mkToolchain { toolchainProfile = "stable"; };
-    in
-      (crane.mkLib pkgs).overrideToolchain rustToolchain;
+    mkCraneLib = {pkgs, ...}:
+      (rs-harbor.lib.mkToolchain { inherit pkgs; toolchainProfile = "stable"; }).craneLib;
   in {
     packages = forAllSystems ({
       pkgs,
