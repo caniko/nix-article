@@ -2,7 +2,7 @@
   description = "anx: article toolchain — figure layout, generation, and manuscript building";
 
   inputs = {
-    rs-harbor.url = "git+https://codeberg.org/caniko/rs-harbor.git?ref=trunk&rev=9bfa8bdb0ecb22d7bc11448665f7fbaebae7a759";
+    rs-harbor.url = "git+https://codeberg.org/caniko/rs-harbor.git?ref=trunk&rev=c26b735eede8078f795651c4a9cbf0be8733b221";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     tex-harbor = {
       url = "git+https://codeberg.org/caniko/tex-harbor.git?ref=trunk";
@@ -53,9 +53,7 @@
         });
 
     mkCraneLib = {pkgs, ...}: let
-      rustToolchain = pkgs.rust-bin.stable.latest.default.override {
-        extensions = ["rust-src" "rustfmt" "clippy"];
-      };
+      rustToolchain = rs-harbor.lib.mkToolchain { toolchainProfile = "stable"; };
     in
       (crane.mkLib pkgs).overrideToolchain rustToolchain;
   in {
