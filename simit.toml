@@ -3,16 +3,15 @@ backend = "rust-crane"
 
 [ci]
 runtime = "nix"
-runner = "codefloe-global"
+runner = "ubuntu-24.04"
 with_nextest = true
 with_audit = true
 with_deny = true
 with_docs = true
-provider = "crow"
-platform = "forgejo"
+provider = "actions"
+platform = "github"
 workspace = true
 
 [ci.pages]
 repo = "caniko/nix-article"
 canonical_domain = "nix-article.tartanoglu.com"
-token_secret = "CODEBERG_TOKEN"
