@@ -8,5 +8,5 @@ src = "src"
 smart-punctuation = true
 no-section-label = true
 site-url = "/docs/"
-git-repository-url = "https://codeberg.org/caniko/nix-article"
-edit-url-template = "https://codeberg.org/caniko/nix-article/edit/main/docs/src/{path}"
+git-repository-url = "https://github.com/caniko/nix-article"
+edit-url-template = "https://github.com/caniko/nix-article/edit/trunk/docs/src/{path}"

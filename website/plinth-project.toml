@@ -18,7 +18,7 @@ href = "/docs/"
 
 [[nav]]
 label = "Source"
-href = "https://codeberg.org/caniko/nix-article"
+href = "https://github.com/caniko/nix-article"
 
 [[pages]]
 slug = "index"
@@ -38,7 +38,7 @@ primary = true
 
 [[pages.sections.ctas]]
 label = "View source"
-href = "https://codeberg.org/caniko/nix-article"
+href = "https://github.com/caniko/nix-article"
 
 [[pages.sections]]
 type = "feature_grid"

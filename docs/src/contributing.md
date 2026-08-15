@@ -3,7 +3,7 @@
 ## Development Setup
 
 ```bash
-git clone https://codeberg.org/caniko/nix-article.git
+git clone https://github.com/caniko/nix-article.git
 cd nix-article
 ```
 
