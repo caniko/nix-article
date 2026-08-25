@@ -2,7 +2,7 @@
   description = "anx: article toolchain — figure layout, generation, and manuscript building";
 
   inputs = {
-    rs-harbor.url = "git+https://github.com/caniko/rs-harbor.git?ref=trunk&rev=05cc4f162b55fa904b687db1821e2463fa813e50";
+    rs-harbor.url = "git+https://github.com/caniko/harbor-rs.git?ref=trunk&rev=05cc4f162b55fa904b687db1821e2463fa813e50";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     tex-harbor = {
       url = "git+https://github.com/caniko/harbor-tex.git?ref=trunk";
