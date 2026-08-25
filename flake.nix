@@ -5,7 +5,7 @@
     rs-harbor.url = "git+https://github.com/caniko/rs-harbor.git?ref=trunk&rev=05cc4f162b55fa904b687db1821e2463fa813e50";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     tex-harbor = {
-      url = "git+https://codeberg.org/caniko/tex-harbor.git?ref=trunk";
+      url = "git+https://github.com/caniko/harbor-tex.git?ref=trunk";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -20,12 +20,12 @@
     };
 
     plinth = {
-      url = "git+https://codeberg.org/caniko/plinth.git";
+      url = "git+https://github.com/caniko/plinth.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     figurefit = {
-      url = "git+https://codeberg.org/caniko/FigureFit.git";
+      url = "git+https://github.com/caniko/FigureFit.git";
     };
   };
 

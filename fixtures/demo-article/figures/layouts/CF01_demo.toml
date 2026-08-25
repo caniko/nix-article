@@ -1,5 +1,5 @@
 # Demo layout spec for FigureFit solver.
-# See https://codeberg.org/caniko/FigureFit for full schema.
+# See https://github.com/caniko/FigureFit for full schema.
 
 [layout]
 width = 160
