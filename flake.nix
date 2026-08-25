@@ -25,7 +25,7 @@
     };
 
     figurefit = {
-      url = "git+https://github.com/caniko/FigureFit.git";
+      url = "github:caniko/FigureFit";
     };
   };
 
@@ -74,7 +74,7 @@
 
       anx = pkgs.callPackage ./nix/rust.nix {
         inherit lib craneLib buildCache;
-        figurefit = figurefit.packages.${system}.default;
+        figurefit = figurefit.packages.${system}.figurefit;
       };
 
       anx-plot = pkgs.callPackage ./nix/python.nix {
@@ -184,14 +184,14 @@
     in {
       inherit anx anx-plot anx-plugin-zenodo anx-plugin-pandoc docs site projectSite;
 
-      figurefit = figurefit.packages.${system}.default;
+      figurefit = figurefit.packages.${system}.figurefit;
 
       default = pkgs.symlinkJoin {
         name = "anx-toolchain";
         paths = [
           anx
           anx-plot
-          figurefit.packages.${system}.default
+          figurefit.packages.${system}.figurefit
         ];
         nativeBuildInputs = [pkgs.makeWrapper];
         postBuild = let
@@ -217,7 +217,7 @@
     in {
       default = pkgs.callPackage ./nix/dev-shell.nix {
         inherit lib pkgs anx anx-plot tex-harbor;
-        figurefit = figurefit.packages.${system}.default;
+        figurefit = figurefit.packages.${system}.figurefit;
         plinthProject = plinth.packages.${system}.plinth-project;
       };
     });
@@ -227,7 +227,7 @@
       lib,
       system,
     }: rec {
-      figurefitPkg = figurefit.packages.${system}.default;
+      figurefitPkg = figurefit.packages.${system}.figurefit;
 
       mkArticleDevShell = {extraPkgs ? [], ...}:
         pkgs.callPackage ./nix/dev-shell.nix {

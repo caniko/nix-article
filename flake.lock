@@ -17,6 +17,21 @@
     },
     "crane_2": {
       "locked": {
+        "lastModified": 1787326676,
+        "narHash": "sha256-lWhBbBvC05/xwivKBBiM2YNizpmgqCgyOIzomvRuwxs=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "692f7e9ef2ece8125b466f66f2af532b3edaed0d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
+    "crane_3": {
+      "locked": {
         "lastModified": 1781825982,
         "narHash": "sha256-SlXKwIRIhrOSAcTjCB3ftPLzJWZStQIPS7J1FlZPnKk=",
         "owner": "ipetkov",
@@ -30,7 +45,7 @@
         "type": "github"
       }
     },
-    "crane_3": {
+    "crane_4": {
       "locked": {
         "lastModified": 1784248371,
         "narHash": "sha256-0l0Y4D4wbZhp1Oi6h8OpbLtIm/4FN88oCf54MK2ZgiM=",
@@ -47,21 +62,22 @@
     },
     "figurefit": {
       "inputs": {
+        "crane": "crane_2",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1777183348,
-        "narHash": "sha256-UtmnGF/Az1/YCyht8ZdDORR5J6btXBY85Lm1sLwYVxY=",
-        "ref": "refs/heads/trunk",
-        "rev": "32a19af394e09acba002a809b321271433e26c1b",
-        "revCount": 3,
-        "type": "git",
-        "url": "https://codeberg.org/caniko/FigureFit.git"
+        "lastModified": 1787348085,
+        "narHash": "sha256-dZ4rP9i9ZJxHyeACSfwarIPSjhMybMefoEJSqqD8DlM=",
+        "owner": "caniko",
+        "repo": "FigureFit",
+        "rev": "76e00c151b4f199e9b6739a77f4add4aae44c343",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://codeberg.org/caniko/FigureFit.git"
+        "owner": "caniko",
+        "repo": "FigureFit",
+        "type": "github"
       }
     },
     "flake-parts": {
@@ -395,7 +411,7 @@
     },
     "plinth": {
       "inputs": {
-        "crane": "crane_2",
+        "crane": "crane_3",
         "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgs"
@@ -429,7 +445,7 @@
     },
     "rs-harbor": {
       "inputs": {
-        "crane": "crane_3",
+        "crane": "crane_4",
         "flake-parts": "flake-parts",
         "meta-harbor": "meta-harbor",
         "nix-bundle": "nix-bundle",
