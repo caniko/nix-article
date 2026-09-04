@@ -2,12 +2,14 @@
   description = "anx: article toolchain — figure layout, generation, and manuscript building";
 
   inputs = {
-    rs-harbor.url = "git+https://github.com/caniko/rs-harbor.git?ref=trunk&rev=05cc4f162b55fa904b687db1821e2463fa813e50";
+    harbor-rs.url = "git+https://github.com/caniko/harbor-rs.git?ref=trunk&rev=05cc4f162b55fa904b687db1821e2463fa813e50";
+    rs-harbor.follows = "harbor-rs";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    tex-harbor = {
-      url = "git+https://codeberg.org/caniko/tex-harbor.git?ref=trunk";
+    harbor-tex = {
+      url = "git+https://github.com/caniko/harbor-tex.git?ref=trunk";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tex-harbor.follows = "harbor-tex";
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -31,9 +33,9 @@
 
   outputs = {
     self,
-    rs-harbor,
+    harbor-rs,
     nixpkgs,
-    tex-harbor,
+    harbor-tex,
     rust-overlay,
     crane,
     plinth,
@@ -53,7 +55,7 @@
         });
 
     mkCraneLib = {pkgs, ...}:
-      (rs-harbor.lib.mkToolchain { inherit pkgs; toolchainProfile = "stable"; }).craneLib;
+      (harbor-rs.lib.mkToolchain { inherit pkgs; toolchainProfile = "stable"; }).craneLib;
   in {
     packages = forAllSystems ({
       pkgs,
@@ -61,11 +63,11 @@
       system,
     }: let
       craneLib = mkCraneLib {inherit pkgs;};
-      buildCache = rs-harbor.lib.mkBuildCachePolicy {
+      buildCache = harbor-rs.lib.mkBuildCachePolicy {
         inherit pkgs;
         sccachePackage =
-          if builtins.hasAttr system rs-harbor.packages
-          then rs-harbor.packages.${system}.sccache
+          if builtins.hasAttr system harbor-rs.packages
+          then harbor-rs.packages.${system}.sccache
           else pkgs.sccache;
         cacheRoot = null;
         namespaceScope = "canix-rust";
@@ -216,7 +218,7 @@
       };
     in {
       default = pkgs.callPackage ./nix/dev-shell.nix {
-        inherit lib pkgs anx anx-plot tex-harbor;
+        inherit lib pkgs anx anx-plot harbor-tex;
         figurefit = figurefit.packages.${system}.default;
         plinthProject = plinth.packages.${system}.plinth-project;
       };
@@ -231,7 +233,7 @@
 
       mkArticleDevShell = {extraPkgs ? [], ...}:
         pkgs.callPackage ./nix/dev-shell.nix {
-          inherit lib pkgs tex-harbor extraPkgs;
+          inherit lib pkgs harbor-tex extraPkgs;
           anx = self.packages.${system}.anx;
           anx-plot = pkgs.callPackage ./nix/python.nix {
             inherit lib;

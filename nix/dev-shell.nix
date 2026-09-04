@@ -4,11 +4,11 @@
   anx,
   anx-plot,
   figurefit,
-  tex-harbor,
+  harbor-tex,
   plinthProject ? null,
   extraPkgs ? [],
 }:
-tex-harbor.lib.mkTexDevShell {
+harbor-tex.lib.mkTexDevShell {
   inherit pkgs;
   profile = "article";
   extraPackages = with pkgs;
