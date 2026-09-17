@@ -3,13 +3,11 @@
 
   inputs = {
     harbor-rs.url = "git+https://github.com/caniko/harbor-rs.git?ref=trunk&rev=fac8049316846e0ef1c1e6acd92aed7a337b333a";
-    rs-harbor.follows = "harbor-rs";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     harbor-tex = {
       url = "git+https://github.com/caniko/harbor-tex.git?ref=trunk";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    tex-harbor.follows = "harbor-tex";
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
