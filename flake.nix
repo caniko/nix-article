@@ -16,16 +16,15 @@
 
     crane = {
       url = "github:ipetkov/crane";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     plinth = {
-      url = "git+https://codeberg.org/caniko/plinth.git";
+      url = "git+https://github.com/caniko/plinth.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     figurefit = {
-      url = "git+https://codeberg.org/caniko/FigureFit.git";
+      url = "git+https://github.com/caniko/FigureFit.git";
     };
   };
 
