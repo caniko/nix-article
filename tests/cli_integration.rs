@@ -1,8 +1,7 @@
 use std::process::Command;
 
 fn anx_binary() -> String {
-    let target_dir = std::env::var("CARGO_TARGET_DIR")
-        .unwrap_or_else(|_| "target".to_string());
+    let target_dir = std::env::var("CARGO_TARGET_DIR").unwrap_or_else(|_| "target".to_string());
     format!("{}/debug/anx", target_dir)
 }
 
