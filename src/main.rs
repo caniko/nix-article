@@ -92,18 +92,17 @@ enum SizesAction {
     Sync,
 }
 
-mod config;
-mod layout;
-mod figure;
 mod build;
-mod sizes;
+mod config;
+mod figure;
+mod layout;
 mod plugins;
+mod sizes;
 
 fn main() -> Result<()> {
     tracing_subscriber::fmt()
         .with_env_filter(
-            tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| "info".into()),
+            tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into()),
         )
         .init();
 
@@ -114,7 +113,9 @@ fn main() -> Result<()> {
         return config::scaffold(dir);
     }
 
-    let project_dir = cli.project_dir.unwrap_or_else(|| std::env::current_dir().unwrap());
+    let project_dir = cli
+        .project_dir
+        .unwrap_or_else(|| std::env::current_dir().unwrap());
     let config = config::load(&project_dir)?;
 
     match &cli.command {

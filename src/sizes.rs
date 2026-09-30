@@ -4,8 +4,7 @@ use std::process::Command;
 
 pub fn cmd_sync(config: &Config) -> Result<()> {
     let python_cmd = &config.tools.python;
-    let parts = shlex::split(python_cmd)
-        .unwrap_or_else(|| vec![python_cmd.clone()]);
+    let parts = shlex::split(python_cmd).unwrap_or_else(|| vec![python_cmd.clone()]);
 
     // Find the project root (parent of layouts)
     let project_root = config

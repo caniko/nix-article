@@ -30,16 +30,13 @@ pub fn cmd_solve(config: &Config, figure: Option<&str>) -> Result<()> {
         let stem = entry.file_stem().unwrap().to_string_lossy();
         tracing::info!("solving layout: {stem}");
 
-        let output = cmd!(
-            &config.tools.figurefit,
-            entry.to_string_lossy().as_ref()
-        )
-        .stdout_capture()
-        .stderr_capture()
-        .unchecked()
-        .run()
-        .into_diagnostic()
-        .wrap_err_with(|| format!("figurefit failed for {stem}"))?;
+        let output = cmd!(&config.tools.figurefit, entry.to_string_lossy().as_ref())
+            .stdout_capture()
+            .stderr_capture()
+            .unchecked()
+            .run()
+            .into_diagnostic()
+            .wrap_err_with(|| format!("figurefit failed for {stem}"))?;
 
         if !output.status.success() {
             let stderr = String::from_utf8_lossy(&output.stderr);
@@ -74,7 +71,9 @@ pub fn cmd_check(config: &Config) -> Result<()> {
     let layouts_dir = &config.figures.layouts;
 
     for (slug, value) in table {
-        let Some(fig) = value.as_table() else { continue };
+        let Some(fig) = value.as_table() else {
+            continue;
+        };
         let Some(layout_name) = fig.get("layout").and_then(|v| v.as_str()) else {
             tracing::warn!("{slug}: no layout specified");
             continue;

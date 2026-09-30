@@ -27,6 +27,7 @@ tex-harbor.lib.mkTexDevShell {
 
       # Cairo for pycairo
       cairo
+      pkg-config
 
       # Documentation
       mdbook

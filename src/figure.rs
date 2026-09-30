@@ -4,8 +4,7 @@ use std::process::Command;
 
 fn run_python(config: &Config, args: &[&str]) -> Result<()> {
     let python_cmd = &config.tools.python;
-    let parts = shlex::split(python_cmd)
-        .unwrap_or_else(|| vec![python_cmd.clone()]);
+    let parts = shlex::split(python_cmd).unwrap_or_else(|| vec![python_cmd.clone()]);
 
     tracing::debug!("running: {} {}", parts.join(" "), args.join(" "));
 
