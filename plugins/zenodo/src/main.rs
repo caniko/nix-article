@@ -24,6 +24,9 @@ const REDIRECT_PATH: &str = "/oauth/zenodo/callback";
 const LOCAL_REDIRECT_URI: &str = "http://127.0.0.1:53682/oauth/zenodo/callback";
 const REQUIRED_SCOPES: &str = "deposit:write deposit:actions";
 
+#[cfg(test)]
+mod tests;
+
 #[derive(Parser)]
 #[command(name = "anx-plugin-zenodo", version)]
 struct Cli {
