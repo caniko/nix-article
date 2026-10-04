@@ -21,6 +21,8 @@ tex-harbor.lib.mkTexDevShell {
       uv
       ruff
       cargo-nextest
+      cargo-audit
+      cargo-deny
 
       # Image processing
       inkscape
