@@ -17,6 +17,13 @@ allow = [
   "Zlib",
 ]
 
+# dirs-sys uses option-ext for platform directory discovery. Keep its
+# file-level MPL allowance restricted to the exact locked dependency.
+[[licenses.exceptions]]
+name = "option-ext"
+version = "=0.2.0"
+allow = ["MPL-2.0"]
+
 [bans]
 multiple-versions = "warn"
 wildcards = "allow"
