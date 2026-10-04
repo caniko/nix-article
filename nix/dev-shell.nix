@@ -20,6 +20,7 @@ tex-harbor.lib.mkTexDevShell {
       # Python tooling
       uv
       ruff
+      cargo-nextest
 
       # Image processing
       inkscape
