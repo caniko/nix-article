@@ -1,7 +1,7 @@
 use miette::{Context, IntoDiagnostic, Result};
 use serde::Deserialize;
-use std::path::{Path, PathBuf};
 use std::fs;
+use std::path::{Path, PathBuf};
 
 /// Project configuration loaded from article.toml
 #[derive(Clone, Debug, Deserialize)]
@@ -168,27 +168,69 @@ impl Default for SizingConfig {
     }
 }
 
-fn default_name() -> String { "article".into() }
-fn default_tex_main() -> PathBuf { PathBuf::from("manuscript.tex") }
-fn default_figures_registry() -> PathBuf { PathBuf::from("figures.toml") }
-fn default_layouts_dir() -> PathBuf { PathBuf::from("figures/layouts") }
-fn default_panels_dir() -> PathBuf { PathBuf::from("figures/panels") }
-fn default_composites_dir() -> PathBuf { PathBuf::from("figures/composites") }
-fn default_figurefit() -> String { "figurefit".into() }
-fn default_python() -> String { "uv run python".into() }
-fn default_latexmk() -> String { "latexmk".into() }
-fn default_lualatex() -> String { "lualatex".into() }
-fn default_page_width() -> f64 { 210.0 }
-fn default_page_height() -> f64 { 297.0 }
-fn default_margin() -> f64 { 25.0 }
-fn default_font_main() -> String { "Latin Modern Roman".into() }
-fn default_font_sans() -> String { "Latin Modern Sans".into() }
-fn default_font_mono() -> String { "Latin Modern Mono".into() }
-fn default_font_small() -> f64 { 7.0 }
-fn default_font_base() -> f64 { 8.0 }
-fn default_font_label_axis() -> f64 { 9.0 }
-fn default_font_big() -> f64 { 10.0 }
-fn default_font_panel() -> f64 { 14.0 }
+fn default_name() -> String {
+    "article".into()
+}
+fn default_tex_main() -> PathBuf {
+    PathBuf::from("manuscript.tex")
+}
+fn default_figures_registry() -> PathBuf {
+    PathBuf::from("figures.toml")
+}
+fn default_layouts_dir() -> PathBuf {
+    PathBuf::from("figures/layouts")
+}
+fn default_panels_dir() -> PathBuf {
+    PathBuf::from("figures/panels")
+}
+fn default_composites_dir() -> PathBuf {
+    PathBuf::from("figures/composites")
+}
+fn default_figurefit() -> String {
+    "figurefit".into()
+}
+fn default_python() -> String {
+    "uv run python".into()
+}
+fn default_latexmk() -> String {
+    "latexmk".into()
+}
+fn default_lualatex() -> String {
+    "lualatex".into()
+}
+fn default_page_width() -> f64 {
+    210.0
+}
+fn default_page_height() -> f64 {
+    297.0
+}
+fn default_margin() -> f64 {
+    25.0
+}
+fn default_font_main() -> String {
+    "Latin Modern Roman".into()
+}
+fn default_font_sans() -> String {
+    "Latin Modern Sans".into()
+}
+fn default_font_mono() -> String {
+    "Latin Modern Mono".into()
+}
+fn default_font_small() -> f64 {
+    7.0
+}
+fn default_font_base() -> f64 {
+    8.0
+}
+fn default_font_label_axis() -> f64 {
+    9.0
+}
+fn default_font_big() -> f64 {
+    10.0
+}
+fn default_font_panel() -> f64 {
+    14.0
+}
 
 /// Find and load article.toml starting from project_dir, searching upward.
 pub fn load(project_dir: &Path) -> Result<Config> {

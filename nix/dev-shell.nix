@@ -20,6 +20,9 @@ tex-harbor.lib.mkTexDevShell {
       # Python tooling
       uv
       ruff
+      cargo-nextest
+      cargo-audit
+      cargo-deny
 
       # Image processing
       inkscape
@@ -27,6 +30,7 @@ tex-harbor.lib.mkTexDevShell {
 
       # Cairo for pycairo
       cairo
+      pkg-config
 
       # Documentation
       mdbook

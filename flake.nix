@@ -77,6 +77,17 @@
         figurefit = figurefit.packages.${system}.figurefit;
       };
 
+      anx-uncached = pkgs.callPackage ./nix/rust.nix {
+        inherit lib buildCache;
+        craneLib =
+          (rs-harbor.lib.mkToolchain {
+            inherit pkgs;
+            toolchainProfile = "stable";
+          }).rawCraneLib;
+        cacheBuild = false;
+        figurefit = figurefit.packages.${system}.figurefit;
+      };
+
       anx-plot = pkgs.callPackage ./nix/python.nix {
         inherit lib;
         python3 = pkgs.python314;
@@ -182,7 +193,7 @@
         '';
       };
     in {
-      inherit anx anx-plot anx-plugin-zenodo anx-plugin-pandoc docs site projectSite;
+      inherit anx anx-uncached anx-plot anx-plugin-zenodo anx-plugin-pandoc docs site projectSite;
 
       figurefit = figurefit.packages.${system}.figurefit;
 
@@ -209,7 +220,7 @@
       system,
     }: let
       craneLib = mkCraneLib {inherit pkgs;};
-      anx = self.packages.${system}.anx;
+      anx = self.packages.${system}.anx-uncached;
       anx-plot = pkgs.callPackage ./nix/python.nix {
         inherit lib;
         python3 = pkgs.python314;
@@ -246,7 +257,11 @@
       lib,
       system,
     }: let
-      craneLib = mkCraneLib {inherit pkgs;};
+      craneLib =
+        (rs-harbor.lib.mkToolchain {
+          inherit pkgs;
+          toolchainProfile = "stable";
+        }).rawCraneLib;
 
       commonArgs = {
         src = craneLib.cleanCargoSource ./.;
