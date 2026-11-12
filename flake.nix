@@ -169,28 +169,11 @@
         '';
       };
 
-      site = pkgs.stdenvNoCC.mkDerivation {
+      site = plinth.lib.${system}.mkProjectSite {
         pname = "anx-site";
-        version = "0.1.0";
-        src = lib.fileset.toSource {
-          root = ./.;
-          fileset = lib.fileset.unions [
-            ./website
-            ./docs/book.toml
-            ./docs/src
-          ];
-        };
-        nativeBuildInputs = [plinthProject pkgs.mdbook];
-        buildPhase = ''
-          plinth-project build --config website/plinth-project.toml --out public
-          mdbook build docs --dest-dir docs-book
-        '';
-        installPhase = ''
-          mkdir -p $out
-          cp -r public/. $out/
-          mkdir -p $out/docs
-          cp -r docs-book/. $out/docs/
-        '';
+        domain = "nix-article.tartanoglu.com";
+        configPath = ./website/plinth-project.toml;
+        docsPackage = docs;
       };
     in {
       inherit anx anx-uncached anx-plot anx-plugin-zenodo anx-plugin-pandoc docs site projectSite;
