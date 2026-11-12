@@ -190,6 +190,7 @@
           cp -r public/. $out/
           mkdir -p $out/docs
           cp -r docs-book/. $out/docs/
+          printf '%s\n' "nix-article.tartanoglu.com" > $out/.domains
         '';
       };
     in {
